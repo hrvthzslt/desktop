@@ -1,9 +1,17 @@
 #!/bin/sh
 
-install_dependency() {
+install_packages() {
   for dependency in "$@"; do
     dpkg -s "$dependency" 2>/dev/null || sudo apt install "$dependency"
   done
+}
+
+install_dependencies() {
+  install_packages git make gcc libx11-dev libxft-dev libxinerama-dev xorg
+}
+
+install_desktop_programs() {
+  install_packages st nitrogen picom
 }
 
 copy_desktop_entry() {
@@ -11,7 +19,8 @@ copy_desktop_entry() {
 }
 
 main() {
-  install_dependency git make gcc libx11-dev libxft-dev libxinerama-dev xorg
+  install_dependencies
+  install_desktop_programs
   copy_desktop_entry
 }
 

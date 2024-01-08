@@ -9,13 +9,6 @@ setup_debian() {
   fi
 }
 
-build_st() {
-  echo "Building st"
-  cd st || return
-  sudo make clean install
-  cd .. || return
-}
-
 build_dmenu() {
   echo "Building dmenu"
   cd dmenu || return
@@ -32,7 +25,6 @@ build_dwm() {
 
 main() {
   setup_debian
-  build_st
   build_dmenu
   build_dwm
 }
