@@ -7,7 +7,7 @@ install_packages() {
 }
 
 install_dependencies() {
-  install_packages git make gcc libx11-dev libxft-dev libxinerama-dev xorg
+  install_packages git make gcc libx11-dev libxft-dev libxinerama-dev libxrandr-dev xorg
 }
 
 install_desktop_programs() {

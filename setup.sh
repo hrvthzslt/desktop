@@ -23,10 +23,18 @@ build_dwm() {
   cd .. || return
 }
 
+build_slock() {
+  echo "Building slock"
+  cd slock || return
+  sudo make clean install
+  cd .. || return
+}
+
 main() {
   setup_debian
   build_dmenu
   build_dwm
+  build_slock
 }
 
 main
