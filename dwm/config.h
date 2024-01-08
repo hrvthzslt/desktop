@@ -18,6 +18,12 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
+static const char *const autostart[] = {
+	"picom", NULL,
+    "nitrogen", "--restore", NULL,
+	NULL /* terminate */
+};
+
 /* tagging */
 static const char *tags[] = { "", "", "󰻞", "" };
 
