@@ -11,17 +11,22 @@ install_dependencies() {
 }
 
 install_desktop_programs() {
-  install_packages st nitrogen picom
+  install_packages st nitrogen picom mpv
 }
 
 copy_desktop_entry() {
-  sudo cp ./dwm.desktop /usr/share/xsessions/
+  sudo cp -v ../config/dwm.desktop /usr/share/xsessions/
+}
+
+copy_touchpad_config() {
+  sudo cp -v ../config/30-touchpad.conf /etc/X11/xorg.conf.d/
 }
 
 main() {
   install_dependencies
   install_desktop_programs
   copy_desktop_entry
+  copy_touchpad_config
 }
 
 main
