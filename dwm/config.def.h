@@ -19,7 +19,7 @@ static const char *colors[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"picom", NULL,
+	"picom", "--backend", "xr_glx_hybrid", "--vsync", NULL,
     "nitrogen", "--restore", NULL,
 	NULL /* terminate */
 };
