@@ -11,7 +11,7 @@ install_dependencies() {
 }
 
 install_desktop_programs() {
-  install_packages st nitrogen picom mpv
+  install_packages st nitrogen picom mpv dunst blueman
 }
 
 copy_desktop_entry() {
