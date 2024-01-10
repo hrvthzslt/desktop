@@ -22,6 +22,7 @@ main() {
   build dmenu
   build dwm
   build slock
+  build slstatus
 }
 
 main
