@@ -1,6 +1,6 @@
 # Desktop environment
 
-My desktop environment for linux, based on suckless tools. Currently Debian only.
+My desktop environment for linux, based on suckless tools. Currently setup is for Debian based distros only.
 
 ## Setup
 
