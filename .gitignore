@@ -1,6 +1,8 @@
 /*/*.o
+/*/*/*.o
 /*/config.h
 /dmenu/dmenu
 /dmenu/stest
 /dwm/dwm
 /slock/slock
+/slstatus/slstatus
