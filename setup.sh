@@ -9,32 +9,19 @@ setup_debian() {
   fi
 }
 
-build_dmenu() {
-  echo "Building dmenu"
-  cd dmenu || return
-  sudo make clean install
-  cd .. || return
-}
-
-build_dwm() {
-  echo "Building dwm"
-  cd dwm || return
-  sudo make clean install
-  cd .. || return
-}
-
-build_slock() {
-  echo "Building slock"
-  cd slock || return
+build() {
+  echo "Building $1"
+  cd "$1" || return
+  sudo cp config.def.h config.h
   sudo make clean install
   cd .. || return
 }
 
 main() {
   setup_debian
-  build_dmenu
-  build_dwm
-  build_slock
+  build dmenu
+  build dwm
+  build slock
 }
 
 main

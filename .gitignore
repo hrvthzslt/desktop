@@ -1,4 +1,5 @@
 /*/*.o
+/*/config.h
 /dmenu/dmenu
 /dmenu/stest
 /dwm/dwm
