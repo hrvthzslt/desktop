@@ -26,6 +26,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
+    "slstatus", NULL,
 	/* "picom", "--backend", "xr_glx_hybrid", "--vsync", NULL, */
     "picom", "--backend", "glx", "--vsync", NULL,
     "nitrogen", "--restore", NULL,
