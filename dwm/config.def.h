@@ -82,6 +82,10 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "wezterm", NULL };
 static const char *browsercmd[]  = { "google-chrome", NULL };
 static const char *slockcmd[]  = { "slock", NULL };
+static const char *increasevolumecmd[]  = { "amixer", "sset", "Master", "5%+" };
+static const char *decreasevolumecmd[]  = { "amixer", "sset", "Master", "5%-" };
+static const char *mutevolumecmd[]  = { "amixer", "sset", "Master", "0%" };
+static const char *restartslstatuscmd[]  = { "killall", "-s", "USR1", "slstatus", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -90,6 +94,12 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
     { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
+    { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = increasevolumecmd } },
+    { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = restartslstatuscmd } },
+    { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = decreasevolumecmd } },
+    { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = restartslstatuscmd } },
+    { 0,                            XF86XK_AudioMute, spawn, {.v = mutevolumecmd } },
+    { 0,                            XF86XK_AudioMute, spawn, {.v = restartslstatuscmd } },
     // WM related keybindings
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
