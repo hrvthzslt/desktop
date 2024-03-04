@@ -11,7 +11,7 @@ install_dependencies() {
 }
 
 install_desktop_programs() {
-  install_packages st nitrogen picom mpv dunst blueman gnome-keyring-daemon
+  install_packages st nitrogen picom mpv dunst gnome-keyring-daemon alacritty
 }
 
 copy_desktop_entry() {
