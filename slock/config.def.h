@@ -4,7 +4,7 @@ static const char *group = "nogroup";
 
 static const char *colorname[NUMCOLS] = {
 	[INIT] =   "black",     /* after initialization */
-  	[INPUT] =  "#b16286",   /* during input */
+  	[INPUT] =  "#504945",   /* during input */
 	[FAILED] = "#cc241d",   /* wrong password */
 };
 
