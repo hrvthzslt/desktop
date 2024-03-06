@@ -65,9 +65,13 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function          format    argument */
+    /* { ram_perc,          " 󱌼 %s%%", NULL }, */
+    /* { cpu_perc,          "  %s%%", NULL }, */
+    /* { disk_perc,         "  %s%% ", "/" }, */
     { run_command,       " 󰖀 %s ",  "amixer sget Master | tail -1 | awk '{print $5 }' | sed 's@\\(\\[\\|\\]\\)@@g'" },
     { wifi_perc,         " 󰖩 %s%%", "wlp0s20f3" },
     { wifi_essid,        " %s ", "wlp0s20f3" },
+    { run_command,       " 󰂯 %s ", "bluetoothctl devices Connected | wc -l"},
     { battery_perc,      " 󱊣 %s%%", "BAT0" },
     /* { battery_remaining, " %s",   "BAT0" }, */
     { battery_state,     " %s ",   "BAT0" },
