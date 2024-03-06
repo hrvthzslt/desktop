@@ -12,5 +12,5 @@ Run `./setup.sh`, it will do the following actions:
 
 ##  Todo
 
-- Decide default terminal / Set it up
-- Automatically handle monitor attach/detach
+- [x] Decide default terminal / Set it up
+- [x] Automatically handle monitor attach/detach

@@ -87,6 +87,8 @@ static const char *increasevolumecmd[]  = { "amixer", "sset", "Master", "5%+" };
 static const char *decreasevolumecmd[]  = { "amixer", "sset", "Master", "5%-" };
 static const char *mutevolumecmd[]  = { "amixer", "sset", "Master", "0%" };
 static const char *restartslstatuscmd[]  = { "killall", "-s", "USR1", "slstatus", NULL };
+static const char *detectmonitorscmd[]  = { "autorandr", "--change", NULL };
+static const char *nitrogenrestorecmd[]  = { "nitrogen", "--restore", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -95,6 +97,8 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
     { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
+    { MODKEY,                       XK_r,      spawn,          {.v = detectmonitorscmd } },
+    { MODKEY,                       XK_r,      spawn,          {.v = nitrogenrestorecmd } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = increasevolumecmd } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = restartslstatuscmd } },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = decreasevolumecmd } },
