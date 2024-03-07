@@ -11,7 +11,7 @@ install_dependencies() {
 }
 
 install_desktop_programs() {
-  install_packages st nitrogen picom arandr xrandr autorandr mpv dunst gnome-keyring-daemon alacritty
+  install_packages st nitrogen picom arandr xrandr autorandr mpv dunst gnome-keyring-daemon alacritty flameshot
 }
 
 copy_desktop_entry() {

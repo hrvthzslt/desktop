@@ -95,6 +95,7 @@ static const char *detectmonitorscmd[]  = { "autorandr", "--change", NULL };
 static const char *nitrogenrestorecmd[]  = { "nitrogen", "--restore", NULL };
 static const char *nmtuicmd[]  = { "alacritty", "--title", "nmtui", "--command", "nmtui", NULL };
 static const char *bluetuiuthcmd[]  = { "alacritty", "--title", "bluetuith", "--command", "bluetuith", NULL };
+static const char *prtscrcmd[]  = { "flameshot", "gui", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -113,6 +114,7 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = restartslstatuscmd } },
     { 0,                            XF86XK_AudioMute, spawn, {.v = mutevolumecmd } },
     { 0,                            XF86XK_AudioMute, spawn, {.v = restartslstatuscmd } },
+    { 0,                            XK_Print,         spawn, {.v = prtscrcmd } },
     // WM related keybindings
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },

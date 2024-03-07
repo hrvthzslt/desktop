@@ -15,6 +15,6 @@ Run `./setup.sh`, it will do the following actions:
 - [x] Decide default terminal / Set it up
 - [x] Automatically handle monitor attach/detach
 - [ ] Brightness control
-- [ ] Screenshot
+- [x] Screenshot
 - [x] Network manager
 - [x] Bluetooth manager
