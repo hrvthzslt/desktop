@@ -41,6 +41,8 @@ static const char *const autostart[] = {
 /* tagging */
 static const char *tags[] = { "", "", "󰻞", "" };
 
+static const char termname[] = "alacritty";
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -48,7 +50,7 @@ static const Rule rules[] = {
 	 */
 	/* class            instance    title       tags mask     isfloating   monitor */
     { "st",             NULL,       NULL,                  1,            0,           -1 },
-    { "alacritty",      NULL,       NULL,                  1,            0,           -1 },
+    { termname,         NULL,       NULL,                  1,            0,           -1 },
     { "kitty",          NULL,       NULL,                  1,            0,           -1 },
     { "firefox",        NULL,       NULL,                  1 << 1,       0,           -1 },
     /* { "google-chrome",  NULL,       NULL,                  1 << 1,       0,           -1 }, */
@@ -84,7 +86,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { termname, NULL };
 static const char *browsercmd[]  = { "google-chrome", NULL };
 static const char *slockcmd[]  = { "slock", NULL };
 static const char *increasevolumecmd[]  = { "amixer", "sset", "Master", "5%+" };
@@ -95,8 +97,8 @@ static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10%-", NULL 
 static const char *restartslstatuscmd[]  = { "killall", "-s", "USR1", "slstatus", NULL };
 static const char *detectmonitorscmd[]  = { "autorandr", "--change", NULL };
 static const char *nitrogenrestorecmd[]  = { "nitrogen", "--restore", NULL };
-static const char *nmtuicmd[]  = { "alacritty", "--title", "nmtui", "--command", "nmtui", NULL };
-static const char *bluetuiuthcmd[]  = { "alacritty", "--title", "bluetuith", "--command", "bluetuith", NULL };
+static const char *nmtuicmd[]  = { termname, "--title", "nmtui", "--command", "nmtui", NULL };
+static const char *bluetuiuthcmd[]  = { termname, "--title", "bluetuith", "--command", "bluetuith", NULL };
 static const char *prtscrcmd[]  = { "flameshot", "gui", NULL };
 
 static const Key keys[] = {
