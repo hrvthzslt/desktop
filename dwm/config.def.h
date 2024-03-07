@@ -53,6 +53,8 @@ static const Rule rules[] = {
     { "firefox",        NULL,       NULL,                  1 << 1,       0,           -1 },
     /* { "google-chrome",  NULL,       NULL,                  1 << 1,       0,           -1 }, */
     { NULL,             NULL,       "Google Chrome",       1 << 1,       0,           -1 },
+    { NULL,             NULL,       "nmtui",               0,            1,           -1 },
+    { NULL,             NULL,       "bluetuith",           0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -91,6 +93,8 @@ static const char *mutevolumecmd[]  = { "amixer", "sset", "Master", "0%" };
 static const char *restartslstatuscmd[]  = { "killall", "-s", "USR1", "slstatus", NULL };
 static const char *detectmonitorscmd[]  = { "autorandr", "--change", NULL };
 static const char *nitrogenrestorecmd[]  = { "nitrogen", "--restore", NULL };
+static const char *nmtuicmd[]  = { "alacritty", "--title", "nmtui", "--command", "nmtui", NULL };
+static const char *bluetuiuthcmd[]  = { "alacritty", "--title", "bluetuith", "--command", "bluetuith", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -101,6 +105,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
     { MODKEY,                       XK_r,      spawn,          {.v = detectmonitorscmd } },
     { MODKEY,                       XK_r,      spawn,          {.v = nitrogenrestorecmd } },
+    { MODKEY,                       XK_n,      spawn,          {.v = nmtuicmd } },
+    { MODKEY,                       XK_u,      spawn,          {.v = bluetuiuthcmd } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = increasevolumecmd } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = restartslstatuscmd } },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = decreasevolumecmd } },

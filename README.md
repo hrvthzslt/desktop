@@ -16,5 +16,5 @@ Run `./setup.sh`, it will do the following actions:
 - [x] Automatically handle monitor attach/detach
 - [ ] Brightness control
 - [ ] Screenshot
-- [ ] Network manager
-- [ ] Bluetooth manager
+- [x] Network manager
+- [x] Bluetooth manager
