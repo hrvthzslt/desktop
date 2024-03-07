@@ -50,7 +50,7 @@ static const Rule rules[] = {
 	 */
 	/* class            instance    title       tags mask     isfloating   monitor */
     { "st",             NULL,       NULL,                  1,            0,           -1 },
-    { termname,         NULL,       NULL,                  1,            0,           -1 },
+    { NULL,             NULL,       "Alacritty",           1,            0,           -1 },
     { "kitty",          NULL,       NULL,                  1,            0,           -1 },
     { "firefox",        NULL,       NULL,                  1 << 1,       0,           -1 },
     /* { "google-chrome",  NULL,       NULL,                  1 << 1,       0,           -1 }, */
