@@ -11,7 +11,20 @@ install_dependencies() {
 }
 
 install_desktop_programs() {
-  install_packages st nitrogen picom arandr xrandr autorandr mpv dunst gnome-keyring-daemon alacritty flameshot
+  install_packages st \
+    nitrogen \
+    picom \
+    arandr \
+    xrandr \
+    autorandr \
+    mpv \
+    dunst \
+    gnome-keyring-daemon \
+    alacritty \
+    flameshot \
+    brightnessctl
+
+  sudo chmod +s "$(which brightnessctl)"
 }
 
 copy_desktop_entry() {
