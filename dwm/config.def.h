@@ -48,15 +48,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class            instance    title       tags mask     isfloating   monitor */
-    { "st",             NULL,       NULL,                  1,            0,           -1 },
-    { NULL,             NULL,       "Alacritty",           1,            0,           -1 },
-    { "kitty",          NULL,       NULL,                  1,            0,           -1 },
-    { "firefox",        NULL,       NULL,                  1 << 1,       0,           -1 },
-    /* { "google-chrome",  NULL,       NULL,                  1 << 1,       0,           -1 }, */
-    { NULL,             NULL,       "Google Chrome",       1 << 1,       0,           -1 },
-    { NULL,             NULL,       "nmtui",               0,            1,           -1 },
-    { NULL,             NULL,       "bluetuith",           0,            1,           -1 },
+	/* class            instance    title                   tags mask     isfloating   monitor */
+    { "st",             NULL,       NULL,                   1,            0,           -1 },
+    { NULL,             NULL,       "Alacritty",            1,            0,           -1 },
+    { "kitty",          NULL,       NULL,                   1,            0,           -1 },
+    { "firefox",        NULL,       NULL,                   1 << 1,       0,           -1 },
+    /* { "google-chrome",  NULL,       NULL,                   1 << 1,       0,           -1 }, */
+    { NULL,             NULL,       "Google Chrome",        1 << 1,       0,           -1 },
+    { NULL,             NULL,       "nmtui",                0,            1,           -1 },
+    { NULL,             NULL,       "bluetuith",            0,            1,           -1 },
+    { NULL,             NULL,       "Screen Layout Editor", 0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -100,6 +101,7 @@ static const char *nitrogenrestorecmd[]  = { "nitrogen", "--restore", NULL };
 static const char *nmtuicmd[]  = { termname, "--title", "nmtui", "--command", "nmtui", NULL };
 static const char *bluetuiuthcmd[]  = { termname, "--title", "bluetuith", "--command", "bluetuith", NULL };
 static const char *prtscrcmd[]  = { "flameshot", "gui", NULL };
+static const char *arandrcmd[]  = { "arandr", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -112,6 +114,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_r,      spawn,          {.v = nitrogenrestorecmd } },
     { MODKEY,                       XK_n,      spawn,          {.v = nmtuicmd } },
     { MODKEY,                       XK_u,      spawn,          {.v = bluetuiuthcmd } },
+    { MODKEY,                       XK_s,      spawn,          {.v = arandrcmd } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = increasevolumecmd } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = restartslstatuscmd } },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = decreasevolumecmd } },
