@@ -31,7 +31,6 @@ static const unsigned int alphas[][3]      = {
 static const char *const autostart[] = {
     "gnome-keyring-daemon", "-r", "-d", NULL,
     "slstatus", NULL,
-    "autorandr", "--change", NULL,
 	/* "picom", "--backend", "xr_glx_hybrid", "--vsync", NULL, */
     "picom", "--backend", "glx", "--vsync", NULL,
     "nitrogen", "--restore", NULL,
