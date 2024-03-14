@@ -1,0 +1,13 @@
+---
+- name: slock install
+  tags:
+    - slock
+  block:
+    - name: install
+      ansible.builtin.make:
+        target: "{{ item }}"
+        chdir: "{{ role_path }}/files/slock"
+      loop:
+        - clean
+        - install
+      become: yes

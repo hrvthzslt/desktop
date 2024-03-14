@@ -1,0 +1,10 @@
+---
+- name: clipmenu install
+  tags:
+    - clipmenu
+  block:
+    - name: install
+      ansible.builtin.make:
+        target: install
+        chdir: "{{ role_path }}/files/clipmenu"
+      become: yes

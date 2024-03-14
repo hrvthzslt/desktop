@@ -1,0 +1,13 @@
+---
+- name: dmenu install
+  tags:
+    - dmenu
+  block:
+    - name: install
+      ansible.builtin.make:
+        target: "{{ item }}"
+        chdir: "{{ role_path }}/files/dmenu"
+      loop:
+        - clean
+        - install
+      become: yes

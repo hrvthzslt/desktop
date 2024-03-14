@@ -1,0 +1,13 @@
+---
+- name: dwm install
+  tags:
+    - dwm
+  block:
+    - name: install
+      ansible.builtin.make:
+        target: "{{ item }}"
+        chdir: "{{ role_path }}/files/dwm"
+      loop:
+        - clean
+        - install
+      become: yes

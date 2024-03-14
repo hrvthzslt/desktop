@@ -1,0 +1,30 @@
+---
+- name: install
+  ansible.builtin.apt:
+    name: "{{ item }}"
+  loop:
+    - git 
+    - make 
+    - gcc 
+    - libx11-dev 
+    - libxft-dev 
+    - libxinerama-dev 
+    - libxrandr-dev 
+    - xorg
+    - x11-xserver-utils
+    - nitrogen
+    - picom
+    - arandr
+    - autorandr
+    - mpv
+    - dunst
+    - gnome-keyring
+    - alacritty
+    - flameshot
+    - brightnessctl
+    - xsel
+  become: yes
+
+- name: make brightnessctl runable without sudo
+  ansible.builtin.shell: 'sudo chmod +s "$(which brightnessctl)"'
+

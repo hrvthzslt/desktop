@@ -1,0 +1,13 @@
+---
+- name: slstatus install
+  tags:
+    - slstatus
+  block:
+    - name: install
+      ansible.builtin.make:
+        target: "{{ item }}"
+        chdir: "{{ role_path }}/files/slstatus"
+      loop:
+        - clean
+        - install
+      become: yes
