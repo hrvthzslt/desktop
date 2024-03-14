@@ -4,6 +4,7 @@
   roles:
     - dependencies
     - config
+    - fonts
     - clipnotify
     - clipmenu
     - slock
