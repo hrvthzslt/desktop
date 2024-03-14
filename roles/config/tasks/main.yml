@@ -1,18 +1,16 @@
-- name: config | linkg
+- name: config | copy
   tags:
     - config
   block:
     - name: desktop entry
-      ansible.builtin.file:
+      ansible.builtin.copy:
         src: "{{ role_path }}/files/desktop/dwm.desktop"
         dest: "/usr/share/xsessions/dwm.desktop"
-        state: link
-        force: yes
+        mode: 0644
       become: yes
     - name: touchpad config
-      ansible.builtin.file:
+      ansible.builtin.copy:
         src: "{{ role_path }}/files/touchpad/30-touchpad.conf"
         dest: "/etc/X11/xorg.conf.d/30-touchpad.conf"
-        state: link
-        force: yes
+        mode: 0644
       become: yes
