@@ -22,7 +22,8 @@ install_desktop_programs() {
     gnome-keyring-daemon \
     alacritty \
     flameshot \
-    brightnessctl
+    brightnessctl \
+    xsel
 
   sudo chmod +s "$(which brightnessctl)"
 }

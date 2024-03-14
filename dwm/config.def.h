@@ -33,6 +33,7 @@ static const unsigned int alphas[][3]      = {
 static const char *const autostart[] = {
     "gnome-keyring-daemon", "-r", "-d", NULL,
     "slstatus", NULL,
+    "clipmenud", NULL,
     "picom", "--backend", "glx", "--vsync", NULL,
     /* "picom", "--backend", "glx", "--vsync", "--blur-method", "dual_kawase", "--blur-strength", "3", NULL, */
     "nitrogen", "--restore", NULL,
@@ -87,7 +88,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *clipmenucmd[]  = { "clipmenu", "-i", "-fn", dmenufont, "-nb", col_gray2, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { termname, NULL };
 static const char *browsercmd[]  = { "google-chrome", NULL };
 static const char *slockcmd[]  = { "slock", NULL };
@@ -108,6 +110,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
     // Program related keybindings
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+    { MODKEY|ShiftMask,             XK_p,      spawn,          {.v = clipmenucmd } },
     { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
     { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },

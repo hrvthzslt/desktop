@@ -17,12 +17,21 @@ build() {
   cd .. || return
 }
 
+build_clipnotify() {
+  echo "Building clipnotify"
+  cd clipnotify || return
+  sudo make install
+  cd .. || return
+}
+
 main() {
   setup_debian
   build dmenu
   build dwm
   build slock
   build slstatus
+  build_clipnotify
+  build clipmenu
 }
 
 main
