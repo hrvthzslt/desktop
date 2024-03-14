@@ -6,6 +6,8 @@ static const unsigned int gappx     = 8;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int splitstatus        = 1;        /* 1 for split status items */
+static const char *splitdelim        = ";";       /* Character used for separating status */
 static const char *fonts[]          = { "Hack Nerd Font:size=13" };
 static const char dmenufont[]       = "Hack Nerd Font:size=13";
 static const char col_gray1[]       = "#282828";
@@ -31,8 +33,8 @@ static const unsigned int alphas[][3]      = {
 static const char *const autostart[] = {
     "gnome-keyring-daemon", "-r", "-d", NULL,
     "slstatus", NULL,
-	/* "picom", "--backend", "xr_glx_hybrid", "--vsync", NULL, */
     "picom", "--backend", "glx", "--vsync", NULL,
+    /* "picom", "--backend", "glx", "--vsync", "--blur-method", "dual_kawase", "--blur-strength", "3", NULL, */
     "nitrogen", "--restore", NULL,
 	NULL /* terminate */
 };

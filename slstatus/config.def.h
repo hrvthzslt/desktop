@@ -65,6 +65,7 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function          format    argument */
+    { datetime,          "%s;", "%Y-%m-%d %H:%M" },
     { ram_perc,          " 󱌼 %s%% ", NULL },
     { cpu_perc,          "  %s%% ", NULL },
     { disk_perc,         "  %s%% ", "/" },
@@ -74,6 +75,5 @@ static const struct arg args[] = {
     { run_command,       " 󰂯 %s ", "bluetoothctl devices Connected | wc -l"},
     { battery_perc,      " 󱊣 %s%%", "BAT0" },
     /* { battery_remaining, " %s",   "BAT0" }, */
-    { battery_state,     " %s ",   "BAT0" },
-	{ datetime,          "  %s ", "%Y-%m-%d %H:%M" },
+    { battery_state,     " %s ",   "BAT0" },
 };
