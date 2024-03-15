@@ -3,6 +3,11 @@
   tags:
     - dwm
   block:
+    - name: copy config.def.h
+      ansible.builtin.copy:
+        src: "{{ role_path }}/files/dwm/config.def.h"
+        dest: "{{ role_path }}/files/dwm/config.h"
+      become: yes
     - name: install
       ansible.builtin.make:
         target: "{{ item }}"
