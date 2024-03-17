@@ -5,13 +5,13 @@
   block:
     - name: copy config.def.h
       ansible.builtin.copy:
-        src: "{{ role_path }}/files/slock/config.def.h"
-        dest: "{{ role_path }}/files/slock/config.h"
+        src: "{{ playbook_dir }}/slock/config.def.h"
+        dest: "{{ playbook_dir }}/slock/config.h"
       become: yes
     - name: install
       ansible.builtin.make:
         target: "{{ item }}"
-        chdir: "{{ role_path }}/files/slock"
+        chdir: "{{ playbook_dir }}/slock"
       loop:
         - clean
         - install
