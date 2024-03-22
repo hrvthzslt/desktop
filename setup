@@ -1,0 +1,30 @@
+#!/bin/sh
+
+run_ansible() {
+  ansible-playbook -i hosts main.yml --ask-become-pass
+}
+
+debian() {
+  if apt >/dev/null 2>&1; then
+    return
+  fi
+
+  if ! command -v ansible-playbook >/dev/null; then
+    sudo apt update
+    sudo apt install -y python3 ansible
+  fi
+
+  run_ansible
+
+  echo "Installation complete. Please log out and log back again."
+
+  exit 0
+}
+
+main() {
+  debian
+  echo "OS Family not supported."
+  exit 1
+}
+
+main

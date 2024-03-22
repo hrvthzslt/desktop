@@ -6,8 +6,6 @@ static const unsigned int gappx     = 8;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int splitstatus        = 1;        /* 1 for split status items */
-static const char *splitdelim        = ";";       /* Character used for separating status */
 static const char *fonts[]          = { "Hack Nerd Font:size=13" };
 static const char dmenufont[]       = "Hack Nerd Font:size=13";
 static const char col_gray1[]       = "#282828";
@@ -88,8 +86,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *clipmenucmd[]  = { "clipmenu", "-i", "-fn", dmenufont, "-nb", col_gray2, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *clipmenucmd[]  = { "clipmenu", "-i", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *cliptogglecmd[]  = { "clipctl", "toggle", NULL };
 static const char *clipdelcmd[]  = { "clipdel", "-d", "[0-9]*" };
 static const char *termcmd[]  = { termname, NULL };

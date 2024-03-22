@@ -1,0 +1,13 @@
+---
+- name: Set up desktop environment
+  hosts: localhost
+  roles:
+    - dependencies
+    - config
+    - fonts
+    - clipnotify
+    - clipmenu
+    - slock
+    - dmenu
+    - slstatus
+    - dwm

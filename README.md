@@ -1,6 +1,6 @@
 # Desktop environment
 
-My desktop environment for linux, based on suckless tools. Currently setup is for Debian based distros only.
+My desktop environment for linux, based on mostly suckless tools. Currently setup is for Debian based distros only.
 
 ## Setup
 
@@ -9,6 +9,7 @@ Run `./setup.sh`, it will do the following actions:
 - Build dmenu
 - Build dwm
 - Build slock
+- Build clipmenu
 
 ##  Todo
 
