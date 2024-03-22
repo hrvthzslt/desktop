@@ -9,8 +9,10 @@ debian() {
     return
   fi
 
-  sudo apt update
-  sudo apt install -y python3 ansible
+  if ! command -v ansible-playbook >/dev/null; then
+    sudo apt update
+    sudo apt install -y python3 ansible
+  fi
 
   run_ansible
 
