@@ -32,8 +32,8 @@ static const char *const autostart[] = {
     "gnome-keyring-daemon", "-r", "-d", NULL,
     "slstatus", NULL,
     "clipmenud", NULL,
-    "picom", "--backend", "glx", "--vsync", NULL,
-    /* "picom", "--backend", "glx", "--vsync", "--blur-method", "dual_kawase", "--blur-strength", "3", NULL, */
+    /* "picom", "--backend", "glx", "--vsync", NULL, */
+    "picom", "--backend", "glx", "--vsync", "--blur-method", "dual_kawase", "--blur-strength", "4", NULL,
     "nitrogen", "--restore", NULL,
 	NULL /* terminate */
 };
