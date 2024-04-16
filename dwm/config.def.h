@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 8;        /* gaps between windows */
+static const unsigned int gappx     = 4;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -117,7 +117,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_c,      spawn,          {.v = clipdelcmd } },
     { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
     { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-    { MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
+    { MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
     { MODKEY,                       XK_r,      spawn,          {.v = detectmonitorscmd } },
     { MODKEY,                       XK_r,      spawn,          {.v = nitrogenrestorecmd } },
     { MODKEY,                       XK_n,      spawn,          {.v = nmtuicmd } },
