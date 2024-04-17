@@ -16,3 +16,19 @@
         - clean
         - install
       become: yes
+
+- name: symlink config
+  tags:
+    - dwm
+  block:
+    - name: create config directory
+      ansible.builtin.file:
+        path: ~/.dwm
+        state: directory
+
+    - name: symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/dwm"
+        dest: ~/.dwm
+        state: link
+        force: yes
