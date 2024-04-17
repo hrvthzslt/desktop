@@ -3,3 +3,12 @@ super + shift + p
 
 super + c
     clipctl toggle ; killall -s USR1 slstatus
+
+XF86AudioRaiseVolume
+    amixer sset Master 5%+ ; killall -s USR1 slstatus
+
+XF86AudioLowerVolume
+    amixer sset Master 5%- ; killall -s USR1 slstatus
+
+XF86AudioMute
+    amixer sset Master 0% ; killall -s USR1 slstatus
