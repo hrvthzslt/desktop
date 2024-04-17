@@ -1,0 +1,5 @@
+---
+- name: install
+  ansible.builtin.apt:
+    name: sxhkd
+  become: yes

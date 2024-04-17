@@ -1,0 +1,23 @@
+---
+- name: install sxhkd
+  ansible.builtin.import_tasks:
+    file: debian.yml
+  when: ansible_facts['os_family'] == 'Debian'
+  tags:
+    - sxhkd
+
+- name: symlink config
+  tags:
+    - sxhkd
+  block:
+    - name: create config directory
+      ansible.builtin.file:
+        path: ~/.config/sxhkd
+        state: directory
+
+    - name: symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/sxhkd"
+        dest: ~/.config/sxhkd
+        state: link
+        force: yes
