@@ -77,51 +77,14 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-/* static const char *clipmenucmd[]  = { "clipmenu", "-i", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; */
-/* static const char *cliptogglecmd[]  = { "clipctl", "toggle", NULL }; */
-/* static const char *clipdelcmd[]  = { "clipdel", "-d", "[0-9]*" }; */
 static const char *termcmd[]  = { termname, NULL };
-/* static const char *browsercmd[]  = { "google-chrome", NULL }; */
-/* static const char *slockcmd[]  = { "slock", NULL }; */
-/* static const char *increasevolumecmd[]  = { "amixer", "sset", "Master", "5%+" }; */
-/* static const char *decreasevolumecmd[]  = { "amixer", "sset", "Master", "5%-" }; */
-/* static const char *mutevolumecmd[]  = { "amixer", "sset", "Master", "0%" }; */
-/* static const char *brightnessupcmd[] = { "brightnessctl", "set", "10%+", NULL }; */
-/* static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10%-", NULL }; */
-/* static const char *restartslstatuscmd[]  = { "killall", "-s", "USR1", "slstatus", NULL }; */
-/* static const char *detectmonitorscmd[]  = { "autorandr", "--change", NULL }; */
-/* static const char *nitrogenrestorecmd[]  = { "nitrogen", "--restore", NULL }; */
-/* static const char *nmtuicmd[]  = { termname, "--title", "nmtui", "--command", "nmtui", NULL }; */
-/* static const char *bluetuiuthcmd[]  = { termname, "--title", "bluetuith", "--command", "bluetuith", NULL }; */
-/* static const char *prtscrcmd[]  = { "flameshot", "gui", NULL }; */
-/* static const char *arandrcmd[]  = { "arandr", NULL }; */
 
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
     // Program related keybindings
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-    /* { MODKEY|ShiftMask,             XK_p,      spawn,          {.v = clipmenucmd } }, */
-    /* { MODKEY,                       XK_c,      spawn,          {.v = cliptogglecmd } }, */
-    /* { MODKEY,                       XK_c,      spawn,          {.v = restartslstatuscmd } }, */
-    /* { MODKEY|ShiftMask,             XK_c,      spawn,          {.v = clipdelcmd } }, */
-    /* { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } }, */
     { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-    /* { MODKEY,                       XK_w,      spawn,          {.v = browsercmd } }, */
-    /* { MODKEY,                       XK_r,      spawn,          {.v = detectmonitorscmd } }, */
-    /* { MODKEY,                       XK_r,      spawn,          {.v = nitrogenrestorecmd } }, */
-    /* { MODKEY,                       XK_n,      spawn,          {.v = nmtuicmd } }, */
-    /* { MODKEY,                       XK_u,      spawn,          {.v = bluetuiuthcmd } }, */
-    /* { MODKEY,                       XK_s,      spawn,          {.v = arandrcmd } }, */
-    /* { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = increasevolumecmd } }, */
-    /* { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = restartslstatuscmd } }, */
-    /* { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = decreasevolumecmd } }, */
-    /* { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = restartslstatuscmd } }, */
-    /* { 0,                            XF86XK_MonBrightnessUp,  spawn, {.v = brightnessupcmd } }, */
-    /* { 0,                            XF86XK_MonBrightnessDown,  spawn, {.v = brightnessdowncmd } }, */
-    /* { 0,                            XF86XK_AudioMute, spawn, {.v = mutevolumecmd } }, */
-    /* { 0,                            XF86XK_AudioMute, spawn, {.v = restartslstatuscmd } }, */
-    /* { 0,                            XK_Print,         spawn, {.v = prtscrcmd } }, */
     // WM related keybindings
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
