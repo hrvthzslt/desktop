@@ -13,6 +13,7 @@
     - libxfixes-dev
     - xorg
     - x11-xserver-utils
+    - libnotify-bin
     - nitrogen
     - picom
     - arandr

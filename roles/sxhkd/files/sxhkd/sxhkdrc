@@ -1,9 +1,3 @@
-super + shift + p
-    clipmenu
-
-super + c
-    clipctl toggle ; killall -s USR1 slstatus
-
 XF86AudioRaiseVolume
     amixer sset Master 5%+ ; killall -s USR1 slstatus
 
@@ -12,3 +6,39 @@ XF86AudioLowerVolume
 
 XF86AudioMute
     amixer sset Master 0% ; killall -s USR1 slstatus
+
+XF86MonBrightnessUp
+    brightnessctl set 5%+
+
+XF86MonBrightnessDown
+    brightnessctl set 5%-
+
+Print
+    flameshot gui
+
+super + shift + l
+    slock
+
+super + r
+    autorandr --change --force && nitrogen --restore
+
+super + n
+    alacritty --title nmtui --command nmtui
+
+super + u
+    alacritty --title bluetuith --command bluetuith
+
+super + s
+    arandr
+
+super + shift + p
+    clipmenu
+
+super + c
+    clipctl toggle ; killall -s USR1 slstatus
+
+super + shift + c
+    clipdel -d [0-9]*
+
+super + w
+    google-chrome
