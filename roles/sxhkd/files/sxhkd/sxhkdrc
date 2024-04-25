@@ -34,11 +34,17 @@ super + s
 super + shift + p
     clipmenu
 
-super + c
+super + shift + c
     clipctl toggle ; killall -s USR1 slstatus
 
-super + shift + c
+super + c
     clipdel -d [0-9]*
+
+super + a
+    dunstctl close
+
+super + shift + a
+    dunstctl set-paused toggle ; killall -s USR1 slstatus
 
 super + w
     google-chrome

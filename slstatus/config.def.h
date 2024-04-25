@@ -69,6 +69,7 @@ static const struct arg args[] = {
     { cpu_perc,          "  %s%% ", NULL },
     { disk_perc,         "  %s%% ", "/" },
     { run_command,       " %s ", "[ $(clipctl status) = 'enabled' ] && echo 󰅎 || echo 󱘜" },
+    { run_command,       " %s ", "[ $(dunstctl is-paused) = 'false' ] && echo 󰎚 || echo 󱞃" },
     { run_command,       " 󰖀 %s ",  "amixer sget Master | tail -1 | awk '{print $5 }' | sed 's@\\(\\[\\|\\]\\)@@g'" },
     { wifi_perc,         " 󰖩 %s%% ", "wlp0s20f3" },
     /* { wifi_essid,        " %s ", "wlp0s20f3" }, */
