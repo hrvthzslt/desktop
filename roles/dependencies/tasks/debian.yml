@@ -25,6 +25,8 @@
     - flameshot
     - brightnessctl
     - xsel
+    - zip
+    - unzip
   become: yes
 
 - name: make brightnessctl runable without sudo
