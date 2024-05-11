@@ -6,3 +6,4 @@ sxhkd &
 slstatus &
 clipmenud &
 picom --backend glx --vsync --blur-method dual_kawase --blur-strength 4 &
+dunst &
