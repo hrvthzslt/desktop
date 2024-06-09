@@ -32,3 +32,12 @@
         dest: ~/.dwm
         state: link
         force: yes
+      when: ansible_facts['distribution'] != "Debian" or ansible_facts['distribution_major_version'] != "12"
+
+    - name: symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/debian12"
+        dest: ~/.dwm
+        state: link
+        force: yes
+      when: ansible_facts['distribution'] == "Debian" or ansible_facts['distribution_major_version'] == "12"
