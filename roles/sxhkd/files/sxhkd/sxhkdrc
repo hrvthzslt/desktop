@@ -47,4 +47,4 @@ super + shift + a
     dunstctl set-paused toggle ; killall -s USR1 slstatus
 
 super + w
-    google-chrome
+    thorium-browser
