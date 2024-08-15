@@ -27,7 +27,6 @@
     - xsel
     - zip
     - unzip
-    - pipewire-audio
   become: yes
 
 - name: make brightnessctl runable without sudo
