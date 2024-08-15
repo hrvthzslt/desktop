@@ -43,8 +43,7 @@ static const Rule rules[] = {
     { NULL,             NULL,       "Alacritty",            1,            0,           -1 },
     { "kitty",          NULL,       NULL,                   1,            0,           -1 },
     { "firefox",        NULL,       NULL,                   1 << 1,       0,           -1 },
-    /* { "google-chrome",  NULL,       NULL,                   1 << 1,       0,           -1 }, */
-    { NULL,             NULL,       "Google Chrome",        1 << 1,       0,           -1 },
+    { NULL,             NULL,       "Thorium",              1 << 1,       0,           -1 },
     { NULL,             NULL,       "nmtui",                0,            1,           -1 },
     { NULL,             NULL,       "bluetuith",            0,            1,           -1 },
     { NULL,             NULL,       "Screen Layout Editor", 0,            1,           -1 },
