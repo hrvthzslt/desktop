@@ -2,6 +2,8 @@
 
 My desktop environment for linux, based on mostly suckless tools. Currently setup is for Debian based distros only.
 
+![Desktop screenshot](assets/screenshot.png)
+
 ## Setup
 
 Run `make install`, it will do the following actions:
