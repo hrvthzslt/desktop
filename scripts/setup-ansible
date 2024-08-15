@@ -1,9 +1,5 @@
 #!/bin/sh
 
-run_ansible() {
-  ansible-playbook main.yml --ask-become-pass
-}
-
 debian() {
   if apt >/dev/null 2>&1; then
     return
@@ -13,10 +9,6 @@ debian() {
     sudo apt update
     sudo apt install -y python3 ansible
   fi
-
-  run_ansible
-
-  echo "Installation complete. Please log out and log back again."
 
   exit 0
 }

@@ -4,7 +4,7 @@ My desktop environment for linux, based on mostly suckless tools. Currently setu
 
 ## Setup
 
-Run `./setup`, it will do the following actions:
+Run `make install`, it will do the following actions:
 - Install dependencies for Debian (if the package manager is `dpkg`)
 - Build dmenu
 - Build dwm
