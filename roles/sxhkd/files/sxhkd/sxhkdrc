@@ -19,6 +19,9 @@ Print
 super + shift + l
     slock
 
+super + shift + s
+    slock & sudo systemctl suspend
+
 super + r
     autorandr --change --force && nitrogen --restore
 
