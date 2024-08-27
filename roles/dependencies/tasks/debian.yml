@@ -23,6 +23,7 @@
     - gnome-keyring
     - alacritty
     - flameshot
+    - thunar
     - brightnessctl
     - xsel
     - zip
