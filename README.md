@@ -2,7 +2,9 @@
 
 My custom desktop setup based on **suckless** tools and a lot of other programs. Built for **Debian**-based distributions, automated with **Ansible**.
 
-![Desktop screenshot](assets/screenshot.png)
+![Desktop screenshot](assets/screenshot_1.png)
+
+![Desktop screenshot](assets/screenshot_2.png)
 
 ## Setup
 
