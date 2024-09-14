@@ -1783,15 +1783,6 @@ seturgent(Client *c, int urg)
 }
 
 void
-sigchld(int unused)
-{
-    if (signal(SIGCHLD, sigchld) == SIG_ERR)
-       die("can't install SIGCHLD handler:");
-
-    	while (0 < waitpid(-1, NULL, WNOHANG));
-}
-
-void
 showhide(Client *c)
 {
 	if (!c)
@@ -2042,7 +2033,7 @@ updatebarpos(Monitor *m)
 }
 
 void
-updateclientlist()
+updateclientlist(void)
 {
 	Client *c;
 	Monitor *m;
