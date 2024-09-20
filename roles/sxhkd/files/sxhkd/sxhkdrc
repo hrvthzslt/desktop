@@ -41,7 +41,7 @@ super + shift + c
     clipctl toggle ; killall -s USR1 slstatus
 
 super + c
-    clipdel -d [0-9]*
+    clipdel -d ".*"
 
 super + a
     dunstctl close
