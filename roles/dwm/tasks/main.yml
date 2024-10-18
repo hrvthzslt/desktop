@@ -32,7 +32,7 @@
         dest: ~/.dwm
         state: link
         force: yes
-      when: ansible_facts['distribution'] != "Debian" or ansible_facts['distribution_major_version'] != "12"
+      when: ansible_facts['distribution'] != "Debian"
 
     - name: symlink config
       ansible.builtin.file:
@@ -40,4 +40,4 @@
         dest: ~/.dwm
         state: link
         force: yes
-      when: ansible_facts['distribution'] == "Debian" or ansible_facts['distribution_major_version'] == "12"
+      when: ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_major_version'] == "12"
