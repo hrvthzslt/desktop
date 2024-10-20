@@ -8,7 +8,7 @@ My custom desktop setup based on **suckless** tools and a lot of other programs.
 
 ## Setup
 
-The following tools has their source code included in the repository, and has to be built:
+The following tools have their source code included in the repository and need to be built:
 
 - _clipnotify_: Dependency for _clipmenu_
 - _clipmenu_: Clipboard manager
@@ -19,7 +19,7 @@ The following tools has their source code included in the repository, and has to
 
 ### Install
 
-Run all the Ansible playbooks to install all the necessary packages and configurations, build the tools.
+Run all the Ansible playbooks to install all the necessary packages and configurations, and build the tools.
 
 ```shell
 make install
@@ -39,15 +39,21 @@ Build tools individually.
 make clipmenu dmenu slock slstatus dwm
 ```
 
+Set up additional tools for an installation without a desktop environment. (Basically set up xinit)
+
+```shell
+make barebones
+```
+
 ## Run
 
 The installation process will create a new session in the display manager, called **dwm**. Select it, and login.
 
-If you're not using a display manager, you can start the window manager with `startx`.
+If you're not using a display manager, you can start the window manager with `startx`, or run `make barebones`, which will configure **xinit** to start **dwm** in **tty1** automatically.
 
 ## Startup
 
-**dwm** is the entry point for the desktop environment, and it will start all the other tools.
+**dwm** is the entry point for the desktop environment and will start all the other tools.
 
 - _gnome-keyring-daemon_ - start the keyring daemon
 - _autorandr_ - restore the monitor configuration

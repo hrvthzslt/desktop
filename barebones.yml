@@ -1,0 +1,5 @@
+---
+- name: Set up desktop environment
+  hosts: localhost
+  roles:
+    - barebones

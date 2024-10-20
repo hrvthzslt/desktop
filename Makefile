@@ -32,3 +32,7 @@ slstatus: # Build slstatus
 .PHONY: dwm
 dwm: # Build dwm
 	ansible-playbook main.yml --ask-become --tags "dwm"
+
+.PHONY: barebones
+barebones: # Install additional packages for a barebones system
+	ansible-playbook barebones.yml --ask-become

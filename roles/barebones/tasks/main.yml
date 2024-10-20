@@ -1,0 +1,5 @@
+---
+- name: install dependencies
+  ansible.builtin.import_tasks:
+    file: debian.yml
+  when: ansible_facts['os_family'] == 'Debian'
