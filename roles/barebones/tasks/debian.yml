@@ -3,6 +3,9 @@
   ansible.builtin.apt:
     name: "{{ item }}"
   loop:
+    - pmount
+    - psmisc
+    - alsa-utils
     - pulseaudio
     - pulseaudio-utils
     - pavucontrol
@@ -11,6 +14,8 @@
     - bluetooth
     - blueman
     - xinit
+    - network-manager
+    - keychain
     - apt-listbugs
     - apt-listchanges
   become: yes
