@@ -4,6 +4,7 @@
   roles:
     - dependencies
     - config
+    - keyd
     - sxhkd
     - fonts
     - clipnotify
