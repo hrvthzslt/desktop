@@ -29,7 +29,7 @@ super + n
     alacritty --title nmtui --command nmtui
 
 super + u
-    alacritty --title bluetuith --command bluetuith
+    blueman-manager
 
 super + s
     arandr
