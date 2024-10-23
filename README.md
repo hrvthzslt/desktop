@@ -45,6 +45,12 @@ Set up additional tools for an installation without a desktop environment. (Basi
 make barebones
 ```
 
+Setup new ssh key.
+
+```shell
+make ssh
+```
+
 ## Run
 
 The installation process will create a new session in the display manager, called **dwm**. Select it, and login.
