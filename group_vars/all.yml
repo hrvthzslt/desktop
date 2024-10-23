@@ -1,3 +1,4 @@
 ansible_python_interpreter: /usr/bin/python3
 
+tmp_dir: "/tmp"
 third_party_workspace_dir: "{{ ansible_env.HOME }}/workspace/third-party"
