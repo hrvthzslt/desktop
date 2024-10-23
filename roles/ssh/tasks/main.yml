@@ -1,0 +1,38 @@
+- name: check if ssh key id_ed25519 exists
+  stat:
+    path: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
+  register: ssh_key
+
+- name: Debug SSH key existence
+  debug:
+    msg: "SSH key id_ed25519 exists: {{ ssh_key.stat.exists }}"
+
+- name: prompt for ssh key passphrase
+  vars:
+    ansible_become: false
+  pause:
+    prompt: "Enter passphrase for the SSH key (leave empty for no passphrase):"
+  register: ssh_passphrase
+  when: not ssh_key.stat.exists
+
+- name: create ssh key id_ed25519
+  ansible.builtin.command:
+    cmd: ssh-keygen -t ed25519 -f "{{ ansible_env.HOME }}/.ssh/id_ed25519" -N "{{ ssh_passphrase.user_input }}"
+  no_log: true
+  when: not ssh_key.stat.exists
+
+- name: add keychain to .profile
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.profile"
+    line: 'eval "$(keychain -q --eval --agents ssh id_ed25519)"'
+    state: present
+    insertafter: EOF
+    create: yes
+
+- name: add config
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+    line: "AddKeysToAgent yes"
+    state: present
+    insertafter: BOF
+    create: yes

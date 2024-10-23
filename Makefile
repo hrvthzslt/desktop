@@ -36,3 +36,7 @@ dwm: # Build dwm
 .PHONY: barebones
 barebones: # Install additional packages for a barebones system
 	ansible-playbook barebones.yml --ask-become
+
+.PHONY: ssh
+ssh: # Create new ssh key, if needed
+	ansible-playbook ssh.yml
