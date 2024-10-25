@@ -1,0 +1,5 @@
+---
+- name: Set up new ssh key
+  hosts: localhost
+  roles:
+    - ssh

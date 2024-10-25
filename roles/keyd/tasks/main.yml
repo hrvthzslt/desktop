@@ -1,0 +1,58 @@
+---
+- name: keyd install
+  tags:
+    - keyd
+    - install
+    - linux
+  block:
+    - name: check if installed
+      ansible.builtin.command: keyd --version
+      register: keyd_version
+      ignore_errors: yes
+      changed_when: false
+
+    - name: make download folder
+      ansible.builtin.file:
+        path: "{{ third_party_workspace_dir }}"
+        state: directory
+
+    - name: clone repo
+      ansible.builtin.git:
+        repo: "https://github.com/rvaiya/keyd"
+        dest: "{{ third_party_workspace_dir }}/keyd"
+        version: v2.5.0
+
+    - name: build
+      ansible.builtin.make:
+        target: all
+        chdir: "{{ third_party_workspace_dir }}/keyd"
+      when: keyd_version.rc != 0
+
+    - name: install
+      ansible.builtin.make:
+        target: install
+        chdir: "{{ third_party_workspace_dir }}/keyd"
+      become: yes
+      when: keyd_version.rc != 0
+
+    - name: enable service
+      ansible.builtin.systemd:
+        name: keyd
+        enabled: yes
+        state: started
+      become: yes
+
+- name: symlink config
+  tags:
+    - keyd
+    - link
+    - linux
+  block:
+    - name: symlink config
+      become: yes
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/keyd/default.conf"
+        dest: /etc/keyd/default.conf
+        state: link
+        follow: no
+        force: yes

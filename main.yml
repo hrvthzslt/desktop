@@ -4,8 +4,11 @@
   roles:
     - dependencies
     - config
+    - keyd
     - sxhkd
     - fonts
+    - thorium
+    - bluetuith
     - clipnotify
     - clipmenu
     - slock
