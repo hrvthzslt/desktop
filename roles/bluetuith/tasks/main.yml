@@ -1,0 +1,11 @@
+---
+- name: bluetooth install
+  tags:
+    - bluetuith
+  block:
+    - name: download and unarchive
+      ansible.builtin.unarchive:
+        src: https://github.com/darkhz/bluetuith/releases/download/v0.2.3/bluetuith_0.2.3_Linux_i386.tar.gz
+        dest: /usr/local/bin
+        remote_src: yes
+      become: yes
