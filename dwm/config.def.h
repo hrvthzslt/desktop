@@ -47,6 +47,7 @@ static const Rule rules[] = {
     { NULL,             NULL,       "nmtui",                0,            1,           -1 },
     { NULL,             NULL,       "bluetuith",            0,            1,           -1 },
     { NULL,             NULL,       "Screen Layout Editor", 0,            1,           -1 },
+    { NULL,             NULL,       "Onboard",              0,            1,           -1 },
 };
 
 /* layout(s) */
