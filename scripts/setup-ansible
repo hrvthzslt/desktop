@@ -8,6 +8,7 @@ debian() {
   if ! command -v ansible-playbook >/dev/null; then
     sudo apt update
     sudo apt install -y python3 ansible
+    ansible-galaxy collection install community.general
   fi
 
   exit 0
