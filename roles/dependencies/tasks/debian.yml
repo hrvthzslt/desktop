@@ -14,6 +14,9 @@
     - xorg
     - x11-xserver-utils
     - libnotify-bin
+    - lm-sensors
+    - sysstat
+    - acpi
     - nitrogen
     - picom
     - arandr
