@@ -1,0 +1,18 @@
+---
+- name: dwmblocks install
+  tags:
+    - dwmblocks
+  block:
+    - name: copy blocks.def.h
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/dwmblocks/blocks.def.h"
+        dest: "{{ playbook_dir }}/dwmblocks/blocks.h"
+      become: yes
+    - name: install
+      ansible.builtin.make:
+        target: "{{ item }}"
+        chdir: "{{ playbook_dir }}/dwmblocks/"
+      loop:
+        - clean
+        - install
+      become: yes
