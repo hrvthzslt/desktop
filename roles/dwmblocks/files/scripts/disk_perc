@@ -1,0 +1,7 @@
+#!/bin/sh
+
+main() {
+  df -P / | awk 'NR==2 {print $5}'
+}
+
+main

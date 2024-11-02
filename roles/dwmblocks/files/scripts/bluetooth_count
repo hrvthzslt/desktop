@@ -1,0 +1,7 @@
+#!/bin/sh
+
+main() {
+  bluetoothctl devices Connected | wc -l
+}
+
+main

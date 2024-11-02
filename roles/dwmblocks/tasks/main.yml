@@ -16,3 +16,15 @@
         - clean
         - install
       become: yes
+    - name: Create symlinks for scripts
+      ansible.builtin.find:
+        paths: "{{ role_path }}/files/scripts"
+        file_type: file
+      register: scripts_files
+    - name: symlink scripts to /usr/local/bin
+      ansible.builtin.file:
+        src: "{{ item.path }}"
+        dest: "/usr/local/bin/{{ item.path | basename }}"
+        state: link
+      loop: "{{ scripts_files.files }}"
+      become: yes

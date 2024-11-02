@@ -1,0 +1,7 @@
+#!/bin/sh
+
+main() {
+  nmcli dev wifi | grep "\*" | awk '{printf "%d%%", $8}'
+}
+
+main
