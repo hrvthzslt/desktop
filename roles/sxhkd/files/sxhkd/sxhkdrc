@@ -1,11 +1,11 @@
 XF86AudioRaiseVolume
-    amixer sset Master 5%+ ; killall -s USR1 slstatus
+    amixer sset Master 5%+ ; pkill -RTMIN+14 dwmblocks
 
 XF86AudioLowerVolume
-    amixer sset Master 5%- ; killall -s USR1 slstatus
+    amixer sset Master 5%- ; pkill -RTMIN+14 dwmblocks
 
 XF86AudioMute
-    amixer sset Master 0% ; killall -s USR1 slstatus
+    amixer sset Master 0% ; pkill -RTMIN+14 dwmblocks
 
 XF86MonBrightnessUp
     brightnessctl set 5%+
@@ -38,7 +38,7 @@ super + shift + p
     clipmenu
 
 super + shift + c
-    clipctl toggle ; killall -s USR1 slstatus
+    clipctl toggle ; pkill -RTMIN+10 dwmblocks
 
 super + c
     clipdel -d ".*"
@@ -47,7 +47,7 @@ super + a
     dunstctl close
 
 super + shift + a
-    dunstctl set-paused toggle ; killall -s USR1 slstatus
+    dunstctl set-paused toggle ; pkill -RTMIN+12 dwmblocks
 
 super + w
     thorium-browser
