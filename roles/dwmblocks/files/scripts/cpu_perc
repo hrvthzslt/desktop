@@ -1,7 +1,7 @@
 #!/bin/sh
 
 main() {
-  free | grep Mem | awk '{printf "%.0f%%", $3/$2 * 100.0}'
+  iostat -c | awk 'NR>= 4 && NR<=4' | awk '{printf "%.0f%%", $1}'
 }
 
 main
