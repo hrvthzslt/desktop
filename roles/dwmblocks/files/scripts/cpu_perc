@@ -1,0 +1,7 @@
+#!/bin/sh
+
+main() {
+  iostat -c | awk 'NR>= 4 && NR<=4' | awk '{printf "%.0f%%", $1}'
+}
+
+main

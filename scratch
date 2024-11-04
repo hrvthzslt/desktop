@@ -1,0 +1,31 @@
+#!/bin/sh
+
+mem_perc="󱌼 $(free | grep Mem | awk '{printf "%.0f", $3/$2 * 100.0}')%"
+cpu_perc=" $(iostat -c | awk 'NR>= 4 && NR<=4' | awk '{printf "%.0f", $1}')%"
+disk_perc=" $(df / | grep / | awk '{print $5}')"
+
+clipctl_status=$([ "$(clipctl status)" = 'enabled' ] && echo 󰅎 || echo 󱘜)
+
+dunst_status=$([ "$(dunstctl is-paused)" = 'false' ] && echo 󰎚 || echo 󱞃)
+
+alsa_perc=" $(amixer get Master | grep -o '[0-9]*%' | head -n1)"
+
+wifi_perc=" $(nmcli dev wifi | grep "\*" | awk '{print $8}')%"
+
+bluetooth_count="󰂯 $(bluetoothctl devices Connected | wc -l)"
+
+battery_perc="󱊣 $(acpi -b | awk '{print $4}' | sed 's/,//')"
+battery_symbol=$(acpi -b | awk '{print $3}' | sed 's/,//' | awk '{if ($1 == "Discharging") print "-"; else if ($1 == "Charging") print "+"; else print "o"}')
+
+datetime=$(date '+%Y-%m-%d %H:%M')
+
+echo "$mem_perc"
+echo "$cpu_perc"
+echo "$disk_perc"
+echo "$clipctl_status"
+echo "$dunst_status"
+echo "$alsa_perc"
+echo "$wifi_perc"
+echo "$bluetooth_count"
+echo "$battery_perc $battery_symbol"
+echo "$datetime"

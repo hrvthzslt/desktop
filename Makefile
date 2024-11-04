@@ -11,7 +11,7 @@ install: # Install all dependencies and build the programs
 
 .PHONY: build
 build: # Build the programs without checking dependencies
-	ansible-playbook main.yml --ask-become --tags "clipnotify,clipmenu,dmenu,slock,slstatus,dwm"
+	ansible-playbook main.yml --ask-become --tags "clipnotify,clipmenu,dmenu,slock,dwmblocks,dwm"
 
 .PHONY: clipmenu
 clipmenu: # Build the clipmenu and clipnotify
@@ -28,6 +28,10 @@ slock: # Build slock
 .PHONY: slstatus
 slstatus: # Build slstatus
 	ansible-playbook main.yml --ask-become --tags "slstatus"
+
+.PHONY: dwmblocks
+dwmblocks: # Build dwmblocks
+	ansible-playbook main.yml --ask-become --tags "dwmblocks"
 
 .PHONY: dwm
 dwm: # Build dwm
