@@ -1,7 +1,7 @@
 #!/bin/sh
 
 main() {
-  nmcli dev wifi | grep "\*" | awk '{printf "%d%%", $8}'
+  nmcli -t -f active,signal dev wifi | grep '^yes' | awk -F ':' '{printf "%d%%", $2}'
 }
 
 main
