@@ -25,7 +25,7 @@
         paths: "{{ role_path }}/files/scripts"
         file_type: file
       register: scripts_files
-    - name: symlink scripts to /usr/local/bin
+    - name: symlink scripts to .local/bin
       ansible.builtin.file:
         src: "{{ item.path }}"
         dest: "{{ ansible_env.HOME }}/.local/bin/{{ item.path | basename }}"
