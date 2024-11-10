@@ -7,3 +7,4 @@ dwmblocks &
 clipmenud &
 picom --backend glx --vsync --blur-method dual_kawase --blur-strength 4 --experimental-backends &
 dunst &
+sh ~/.dwm/poststart.sh 2>/dev/null &
