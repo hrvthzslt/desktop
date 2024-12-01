@@ -35,7 +35,7 @@ super + s
     arandr
 
 super + shift + p
-    clipmenu
+    clipmenu -nb '#1C1917' -nf '#CFC1BA' -sb '#2C363C' -sf '#F0EDEC'
 
 super + shift + c
     clipctl toggle ; pkill -RTMIN+10 dwmblocks
