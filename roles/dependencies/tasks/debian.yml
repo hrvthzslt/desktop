@@ -32,6 +32,7 @@
     - zip
     - unzip
     - onboard
+    - software-properties-common
   become: yes
 
 - name: make brightnessctl runable without sudo
