@@ -80,4 +80,6 @@ If you're not using a display manager, you can start the window manager with `st
 - **Super + A**: Close notification - _dunst_
 - **Super + Shift + A**: Pause notifications - _dunst_
 - **Super + W**: Open web browser - _thorium_
+- **Super + E**: Show key presses - _screenkey_
+- **Super + Shift + E**: Stop showing key presses - _screenkey_
 - **Print**: Screenshot - _flameshot_

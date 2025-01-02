@@ -26,6 +26,7 @@
     - gnome-keyring
     - alacritty
     - flameshot
+    - screenkey
     - thunar
     - brightnessctl
     - xsel

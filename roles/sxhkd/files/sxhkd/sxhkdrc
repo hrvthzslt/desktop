@@ -51,3 +51,9 @@ super + shift + a
 
 super + w
     thorium-browser
+
+super + e
+    pgrep screenkey || screenkey --show-settings
+
+super + shift + e
+    pkill screenkey
