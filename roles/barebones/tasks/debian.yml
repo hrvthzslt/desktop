@@ -16,6 +16,7 @@
     - xinit
     - network-manager
     - keychain
+    - gmtp
     - apt-listbugs
     - apt-listchanges
   become: yes
