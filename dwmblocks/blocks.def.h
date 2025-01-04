@@ -10,10 +10,10 @@ static const Block blocks[] = {
     {"", "clipctl_status_block", 0, 10},
     {" ", "dunst_status_block", 0, 12},
 
-    {"  ", "alsa_perc_block", 10, 14},
-    {" 󰖩 ", "wifi_perc_block", 10, 0},
-    {" 󰂯 ", "bluetooth_count_block", 10, 0},
-    {" 󱊣 ", "battery_block", 60, 0},
+    {"  ", "alsa_perc_block", 5, 14},
+    {" 󰖩 ", "wifi_perc_block", 5, 0},
+    {" 󰂯 ", "bluetooth_count_block", 5, 0},
+    {" 󱊣 ", "battery_block", 30, 0},
 
     {"", "", 0, 0},
 
