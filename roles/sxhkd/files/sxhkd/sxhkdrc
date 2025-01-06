@@ -34,6 +34,9 @@ super + u
 super + s
     arandr
 
+super + b
+    thunar
+
 super + shift + p
     clipmenu -nb '#1C1917' -nf '#CFC1BA' -sb '#2C363C' -sf '#F0EDEC'
 
