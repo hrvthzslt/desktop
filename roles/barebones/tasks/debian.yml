@@ -17,8 +17,7 @@
     - network-manager
     - keychain
     - gmtp
-    - apt-listbugs
-    - apt-listchanges
+    - gvfs-backends
   become: yes
 
 - name: Symlink xinitrc
