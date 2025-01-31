@@ -82,4 +82,5 @@ If you're not using a display manager, you can start the window manager with `st
 - **Super + W**: Open web browser - _thorium_
 - **Super + E**: Show key presses - _screenkey_
 - **Super + Shift + E**: Stop showing key presses - _screenkey_
+- **Super + O**: Open file browser - _thunar_
 - **Print**: Screenshot - _flameshot_
