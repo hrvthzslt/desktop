@@ -21,7 +21,6 @@
     - picom
     - arandr
     - autorandr
-    - mpv
     - dunst
     - gnome-keyring
     - alacritty
