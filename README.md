@@ -58,7 +58,7 @@ If you're not using a display manager, you can start the window manager with `st
 - _gnome-keyring-daemon_ - start the keyring daemon
 - _autorandr_ - restore the monitor configuration
 - _sxhkd_ - hotkey daemon
-- _slstatus_ - status bar for system information
+- _dwmblocks_ - status bar for system information
 - _clipmenud_ - clipboard manager daemon
 - _picom_ - compositor
 - _dunst_ - notification daemon
