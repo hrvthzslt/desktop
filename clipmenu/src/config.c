@@ -133,7 +133,7 @@ static int convert_selections(const char *str, void *output) {
 
     _drop_(free) char *inner_str = strdup(str);
     expect(inner_str);
-    char *token = strtok(inner_str, " ");
+    const char *token = strtok(inner_str, " ");
     size_t i;
 
     while (token) {
@@ -357,22 +357,32 @@ void setup_selections(Display *dpy, struct cm_selections *sels) {
         XInternAtom(dpy, "CLIPMENUD_CUR_SECONDARY", False);
 }
 
+/**
+ * Maps an Atom to a selection_type based on the selection atoms in the
+ * provided cm_selections struct. Returns CM_SEL_INVALID on error if the
+ * selection type is not found.
+ */
 enum selection_type
-selection_atom_to_selection_type(Atom atom, struct cm_selections *sels) {
+selection_atom_to_selection_type(Atom atom, const struct cm_selections *sels) {
     for (size_t i = 0; i < CM_SEL_MAX; ++i) {
         if (sels[i].selection == atom) {
             return i;
         }
     }
-    die("Unreachable\n");
+    return CM_SEL_INVALID;
 }
 
-enum selection_type storage_atom_to_selection_type(Atom atom,
-                                                   struct cm_selections *sels) {
+/**
+ * Maps an Atom to a selection_type based on the storage atoms in the provided
+ * cm_selections struct. Returns CM_SEL_INVALID on error if the storage type is
+ * not found.
+ */
+enum selection_type
+storage_atom_to_selection_type(Atom atom, const struct cm_selections *sels) {
     for (size_t i = 0; i < CM_SEL_MAX; ++i) {
         if (sels[i].storage == atom) {
             return i;
         }
     }
-    die("Unreachable\n");
+    return CM_SEL_INVALID;
 }

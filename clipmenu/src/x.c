@@ -52,3 +52,47 @@ int xerror_handler(Display *dpy _unused_, XErrorEvent *ee) {
     die("X error with request code=%d, error code=%d\n", ee->request_code,
         ee->error_code);
 }
+
+#define FALLBACK_CHUNK_BYTES 4 * 1024
+
+/**
+ * Calculate and cache an appropriate INCR chunk size.
+ *
+ * We consider selections larger than a quarter of the maximum request size to
+ * be "large". That's what others (like xclip) do, so it's clearly ok in
+ * practice.
+ */
+size_t get_chunk_size(Display *dpy) {
+    // Units are 4-byte words, so this is 1/4 in bytes
+    size_t chunk_size = XExtendedMaxRequestSize(dpy);
+    if (chunk_size == 0) {
+        chunk_size = XMaxRequestSize(dpy);
+    }
+    return chunk_size ? chunk_size / 4 : FALLBACK_CHUNK_BYTES;
+}
+
+/**
+ * Add a new INCR transfer to the active list.
+ */
+void it_add(struct incr_transfer **it_list, struct incr_transfer *it) {
+    if (*it_list) {
+        (*it_list)->prev = it;
+    }
+    it->next = *it_list;
+    it->prev = NULL;
+    *it_list = it;
+}
+/**
+ * Remove an INCR transfer from the active list.
+ */
+void it_remove(struct incr_transfer **it_list, struct incr_transfer *it) {
+    if (it->prev) {
+        it->prev->next = it->next;
+    }
+    if (it->next) {
+        it->next->prev = it->prev;
+    }
+    if (*it_list == it) {
+        *it_list = it->next;
+    }
+}

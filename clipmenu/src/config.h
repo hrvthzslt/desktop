@@ -18,7 +18,8 @@ enum selection_type {
     CM_SEL_CLIPBOARD,
     CM_SEL_PRIMARY,
     CM_SEL_SECONDARY,
-    CM_SEL_MAX
+    CM_SEL_MAX,
+    CM_SEL_INVALID
 };
 struct cm_selections {
     Atom selection;
@@ -79,14 +80,15 @@ char *get_cache_dir(struct config *cfg);
 
 DEFINE_GET_PATH_FUNCTION(line_cache)
 DEFINE_GET_PATH_FUNCTION(enabled)
+DEFINE_GET_PATH_FUNCTION(session_lock)
 
 extern const char *prog_name;
 struct config _nonnull_ setup(const char *inner_prog_name);
 void _nonnull_ setup_selections(Display *dpy, struct cm_selections *sels);
 enum selection_type _nonnull_
-selection_atom_to_selection_type(Atom atom, struct cm_selections *sels);
+selection_atom_to_selection_type(Atom atom, const struct cm_selections *sels);
 enum selection_type _nonnull_
-storage_atom_to_selection_type(Atom atom, struct cm_selections *sels);
+storage_atom_to_selection_type(Atom atom, const struct cm_selections *sels);
 
 int convert_bool(const char *str, void *output);
 int convert_positive_int(const char *str, void *output);

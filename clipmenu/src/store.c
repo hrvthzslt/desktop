@@ -71,7 +71,7 @@ static size_t _must_use_ cs_file_size(size_t nr_snips) {
  * @cs: The clip store to operate on
  * @file_size: The current size of the file
  */
-static int _must_use_ _nonnull_ cs_header_validate(struct clip_store *cs,
+static int _must_use_ _nonnull_ cs_header_validate(const struct clip_store *cs,
                                                    size_t file_size) {
     if (cs->header->nr_snips > cs->header->nr_snips_alloc ||
         (cs->header->nr_snips_alloc + 1) * CS_SNIP_SIZE != file_size) {
@@ -408,7 +408,7 @@ static int _must_use_ _nonnull_ cs_content_add(struct clip_store *cs,
     bool dupe = false;
 
     char dir_path[CS_HASH_STR_MAX];
-    snprintf(dir_path, sizeof(dir_path), "%" PRIu64, hash);
+    snprintf(dir_path, sizeof(dir_path), PRI_HASH, hash);
 
     int ret = mkdirat(cs->content_dir_fd, dir_path, 0700);
     if (ret < 0) {
@@ -501,7 +501,7 @@ int cs_content_get(struct clip_store *cs, uint64_t hash,
     memset(content, '\0', sizeof(struct cs_content));
 
     char filename[PATH_MAX];
-    snprintf(filename, sizeof(filename), "%" PRIu64 "/1", hash);
+    snprintf(filename, sizeof(filename), PRI_HASH "/1", hash);
 
     _drop_(close) int fd = openat(cs->content_dir_fd, filename, O_RDONLY);
     if (fd < 0) {
@@ -562,23 +562,23 @@ int cs_add(struct clip_store *cs, const char *content, uint64_t *out_hash) {
  */
 bool cs_snip_iter(struct ref_guard *guard, enum cs_iter_direction direction,
                   struct cs_snip **snip) {
-    if (guard->status < 0) {
+    if (guard->status < 0 || guard->cs->header->nr_snips == 0) {
         return false;
     }
 
-    struct cs_snip *start = guard->cs->snips;
+    struct cs_snip *oldest = guard->cs->snips;
+    struct cs_snip *newest = oldest + (guard->cs->header->nr_snips - 1);
+    const struct cs_snip *stop =
+        direction == CS_ITER_NEWEST_FIRST ? oldest : newest;
 
-    // cppcheck-suppress [constVariablePointer,unmatchedSuppression]
-    // TODO: False positive? Report upstream
-    struct cs_snip *end = start + guard->cs->header->nr_snips;
-
-    if (*snip) {
+    if (!*snip) {
+        *snip = direction == CS_ITER_NEWEST_FIRST ? newest : oldest;
+        return true;
+    } else if (*snip != stop) {
         *snip = *snip + (direction == CS_ITER_NEWEST_FIRST ? -1 : 1);
-    } else {
-        *snip = direction == CS_ITER_NEWEST_FIRST ? end - 1 : start;
+        return true;
     }
-
-    return *snip >= start && *snip < end;
+    return false;
 }
 
 /**
@@ -591,7 +591,7 @@ static int _must_use_ _nonnull_ cs_content_remove(struct clip_store *cs,
                                                   uint64_t hash) {
 
     char hash_dir_name[CS_HASH_STR_MAX];
-    snprintf(hash_dir_name, sizeof(hash_dir_name), "%" PRIu64, hash);
+    snprintf(hash_dir_name, sizeof(hash_dir_name), PRI_HASH, hash);
 
     _drop_(close) int hash_dir_fd =
         openat(cs->content_dir_fd, hash_dir_name, O_RDONLY);

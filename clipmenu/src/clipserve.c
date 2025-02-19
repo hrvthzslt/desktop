@@ -4,13 +4,92 @@
 #include <inttypes.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "config.h"
 #include "store.h"
 #include "util.h"
 #include "x.h"
 
+static struct incr_transfer *it_list = NULL;
 static Display *dpy;
+static Atom incr_atom;
+
+static size_t chunk_size;
+
+/**
+ * Start an INCR transfer.
+ */
+static void incr_send_start(XSelectionRequestEvent *req,
+                            struct cs_content *content) {
+    long incr_size = content->size;
+    XChangeProperty(dpy, req->requestor, req->property, incr_atom, 32,
+                    PropModeReplace, (unsigned char *)&incr_size, 1);
+
+    struct incr_transfer *it = malloc(sizeof(struct incr_transfer));
+    expect(it);
+    *it = (struct incr_transfer){
+        .requestor = req->requestor,
+        .property = req->property,
+        .target = req->target,
+        .format = 8,
+        .data = (char *)content->data,
+        .data_size = content->size,
+        .offset = 0,
+    };
+
+    it_dbg(it, "Starting transfer\n");
+    it_add(&it_list, it);
+
+    // Listen for PropertyNotify events on the requestor window
+    XSelectInput(dpy, it->requestor, PropertyChangeMask);
+}
+
+/**
+ * Finish an INCR transfer.
+ */
+static void incr_send_finish(struct incr_transfer *it) {
+    XChangeProperty(dpy, it->requestor, it->property, it->target, it->format,
+                    PropModeReplace, NULL, 0);
+    it_dbg(it, "Transfer complete\n");
+    it_remove(&it_list, it);
+    free(it);
+}
+
+/**
+ * Continue sending data during an INCR transfer.
+ */
+static void incr_send_chunk(const XPropertyEvent *pe) {
+    if (pe->state != PropertyDelete) {
+        return;
+    }
+
+    struct incr_transfer *it = it_list;
+    while (it) {
+        if (it->requestor == pe->window && it->property == pe->atom) {
+            size_t remaining = it->data_size - it->offset;
+            size_t this_chunk_size =
+                (remaining > chunk_size) ? chunk_size : remaining;
+
+            it_dbg(it,
+                   "Sending chunk (bytes sent: %zu, bytes remaining: %zu)\n",
+                   it->offset, remaining);
+
+            if (this_chunk_size > 0) {
+                XChangeProperty(dpy, it->requestor, it->property, it->target,
+                                it->format, PropModeReplace,
+                                (unsigned char *)(it->data + it->offset),
+                                this_chunk_size);
+                it->offset += this_chunk_size;
+            } else {
+                incr_send_finish(it);
+            }
+            break;
+        }
+        it = it->next;
+    }
+}
 
 /**
  * Serve clipboard content for all X11 selection requests until all selections
@@ -27,15 +106,31 @@ static void _nonnull_ serve_clipboard(uint64_t hash,
     dpy = XOpenDisplay(NULL);
     expect(dpy);
 
+    chunk_size = get_chunk_size(dpy);
+
     win = XCreateSimpleWindow(dpy, DefaultRootWindow(dpy), 0, 0, 1, 1, 0, 0, 0);
     XStoreName(dpy, win, "clipserve");
     targets = XInternAtom(dpy, "TARGETS", False);
     utf8_string = XInternAtom(dpy, "UTF8_STRING", False);
+    incr_atom = XInternAtom(dpy, "INCR", False);
 
     selections[1] = XInternAtom(dpy, "CLIPBOARD", False);
     for (size_t i = 0; i < arrlen(selections); i++) {
-        XSetSelectionOwner(dpy, selections[i], win, CurrentTime);
-        expect(XGetSelectionOwner(dpy, selections[i]) == win); // ICCCM 2.1
+        bool success = false;
+        for (int attempts = 0; attempts < 5; attempts++) {
+            XSetSelectionOwner(dpy, selections[i], win, CurrentTime);
+
+            // According to ICCCM 2.1, a client acquiring a selection should
+            // confirm success by verifying with GetSelectionOwner.
+            if (XGetSelectionOwner(dpy, selections[i]) == win) {
+                success = true;
+                break;
+            }
+        }
+        if (!success) {
+            die("Failed to set selection for %s\n",
+                XGetAtomName(dpy, selections[i]));
+        }
     }
     remaining_selections = arrlen(selections);
 
@@ -54,7 +149,7 @@ static void _nonnull_ serve_clipboard(uint64_t hash,
 
                 _drop_(XFree) char *window_title =
                     get_window_title(dpy, req->requestor);
-                dbg("Servicing request to window '%s' (0x%lx) for clip %" PRIu64
+                dbg("Servicing request to window '%s' (0x%lX) for clip " PRI_HASH
                     "\n",
                     strnull(window_title), (unsigned long)req->requestor, hash);
 
@@ -66,10 +161,16 @@ static void _nonnull_ serve_clipboard(uint64_t hash,
                                     arrlen(available_targets));
                 } else if (req->target == utf8_string ||
                            req->target == XA_STRING) {
-                    XChangeProperty(dpy, req->requestor, req->property,
-                                    req->target, 8, PropModeReplace,
-                                    (unsigned char *)content->data,
-                                    (int)content->size);
+                    if (content->size < (off_t)chunk_size) {
+                        // Data size is small enough, send directly
+                        XChangeProperty(dpy, req->requestor, req->property,
+                                        req->target, 8, PropModeReplace,
+                                        (unsigned char *)content->data,
+                                        (int)content->size);
+                    } else {
+                        // Initiate INCR transfer
+                        incr_send_start(req, content);
+                    }
                 } else {
                     sev.property = None;
                 }
@@ -79,13 +180,17 @@ static void _nonnull_ serve_clipboard(uint64_t hash,
             }
             case SelectionClear: {
                 if (--remaining_selections == 0) {
-                    dbg("Finished serving clip %" PRIu64 "\n", hash);
+                    dbg("Finished serving clip " PRI_HASH "\n", hash);
                     running = false;
                 } else {
-                    dbg("%d selections remaining to serve for clip %" PRIu64
+                    dbg("%d selections remaining to serve for clip " PRI_HASH
                         "\n",
                         remaining_selections, hash);
                 }
+                break;
+            }
+            case PropertyNotify: {
+                incr_send_chunk(&evt.xproperty);
                 break;
             }
         }
@@ -99,7 +204,7 @@ int main(int argc, char *argv[]) {
     _drop_(config_free) struct config cfg = setup("clipserve");
 
     uint64_t hash;
-    expect(str_to_uint64(argv[1], &hash) == 0);
+    expect(str_to_hex64(argv[1], &hash) == 0);
 
     _drop_(close) int content_dir_fd = open(get_cache_dir(&cfg), O_RDONLY);
     _drop_(close) int snip_fd =
@@ -111,7 +216,7 @@ int main(int argc, char *argv[]) {
 
     _drop_(cs_content_unmap) struct cs_content content;
     die_on(cs_content_get(&cs, hash, &content) < 0,
-           "Hash %" PRIu64 " inaccessible\n", hash);
+           "Hash " PRI_HASH " inaccessible\n", hash);
 
     serve_clipboard(hash, &content);
 
