@@ -20,11 +20,10 @@ static char **dmenu_user_argv;
  * Calculate the base 10 padding length for a number.
  */
 static int get_padding_length(size_t num) {
-    int digits = 0;
-    do {
-        num /= 10;
+    int digits = 1;
+    while (num /= 10) {
         digits++;
-    } while (num > 0);
+    }
     return digits;
 }
 

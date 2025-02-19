@@ -1,4 +1,6 @@
-#!/usr/bin/bash -ex
+#!/usr/bin/env bash
+
+set -ex
 
 if ! (( NO_PID_NAMESPACE )) && (( EUID )); then
     export _UNSHARED=1
@@ -18,6 +20,8 @@ export PATH=$PWD:$PATH
 export CM_CONFIG=$(mktemp)
 export CM_DIR=$(mktemp -d)
 export CM_DEBUG=1
+export ASAN_OPTIONS='halt_on_error=1:abort_on_error=1'
+export UBSAN_OPTIONS='halt_on_error=1:abort_on_error=1'
 
 launcher=$(mktemp)
 l_out=$(mktemp)
@@ -48,6 +52,10 @@ trap 'kill_background_jobs' EXIT
 
 settle() {
     sleep 0.2
+}
+
+long_settle() {
+    sleep 2
 }
 
 check_nr_clips() {
@@ -131,6 +139,14 @@ check_nr_clips 3
 [[ $(clipdel -dv a) == foo ]]
 check_nr_clips 2
 
+# Test literal match
+primary '*foo'
+settle
+check_nr_clips 3
+
+[[ $(clipdel -dF '*') == '*foo' ]]
+check_nr_clips 2
+
 # Check selecting starts serving
 xsel -pc
 
@@ -163,6 +179,40 @@ clipctl toggle
 [[ "$(clipctl status)" == disabled ]]
 clipctl toggle
 [[ "$(clipctl status)" == enabled ]]
+
+# Test INCR support
+set +x
+printf '%.0sa' {1..9999999} | xsel -p
+set -x
+long_settle  # This is a big one, give it some time
+len_before=$(xsel -po | wc -c)
+check_nr_clips 5
+SELECT='[5] aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...' \
+        clipmenu
+long_settle
+len_after=$(xsel -po | wc -c)
+
+# Make sure we got the whole thing
+(( len_before == len_after ))
+
+# Issue #241. Put a large clipboard selection via INCR, then put something else
+# small immediately after.
+xsel -bc
+settle
+check_nr_clips 5
+
+# Large selection (INCR)
+printf '%.0sa' {1..4001} | xsel -b
+long_settle
+
+check_nr_clips 6
+
+# After large selection is stored, put something small that's a possible #
+# partial (non-INCR)
+printf a | xsel -b
+settle
+
+check_nr_clips 6
 
 if (( _UNSHARED )); then
     umount -l /tmp
