@@ -1,6 +1,6 @@
 # DESKTOP
 
-My custom desktop setup based on **suckless** tools and a lot of other programs. Built for **Debian**-based distributions, automated with **Ansible**.
+My custom desktop setup based on **suckless** tools, built around **dwm**. Built for **Debian**-based distributions, automated with **Ansible**.
 
 ![Desktop screenshot](assets/screenshot_1.png)
 
