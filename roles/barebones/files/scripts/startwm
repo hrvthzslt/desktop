@@ -1,0 +1,8 @@
+#!/bin/sh
+
+main() {
+  selected_wm="$(echo "dwm i3" | tr ' ' '\n' | fzf)"
+  startx "$HOME"/.xinitrc "$selected_wm"
+}
+
+main
