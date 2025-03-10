@@ -2,20 +2,15 @@
   tags:
     - config
   block:
-    - name: create desktop entry directory
-      ansible.builtin.file:
-        path: /usr/share/xsessions/
-        state: directory
-      become: yes
-    - name: desktop entry
-      ansible.builtin.copy:
-        src: "{{ role_path }}/files/desktop/dwm.desktop"
-        dest: "/usr/share/xsessions/dwm.desktop"
-        mode: 0644
-      become: yes
     - name: touchpad config
       ansible.builtin.copy:
         src: "{{ role_path }}/files/touchpad/30-touchpad.conf"
         dest: "/etc/X11/xorg.conf.d/30-touchpad.conf"
         mode: 0644
+      become: yes
+
+    - name: create desktop entry directory
+      ansible.builtin.file:
+        path: /usr/share/xsessions/
+        state: directory
       become: yes
