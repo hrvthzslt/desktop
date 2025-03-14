@@ -1,2 +1,9 @@
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
-exec dwm
+
+session=${1:-dwm}
+
+case $session in
+    dwm) exec dwm ;;
+    i3) exec i3 ;;
+    *) exec $1 ;;
+esac

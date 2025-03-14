@@ -3,3 +3,14 @@
   ansible.builtin.import_tasks:
     file: debian.yml
   when: ansible_facts['os_family'] == 'Debian'
+- name: Create symlinks for scripts
+  ansible.builtin.find:
+    paths: "{{ role_path }}/files/scripts"
+    file_type: file
+  register: scripts_files
+- name: symlink scripts to .local/bin
+  ansible.builtin.file:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_env.HOME }}/.local/bin/{{ item.path | basename }}"
+    state: link
+  loop: "{{ scripts_files.files }}"
