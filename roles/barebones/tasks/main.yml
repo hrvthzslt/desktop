@@ -2,7 +2,7 @@
 - name: install dependencies
   ansible.builtin.import_tasks:
     file: debian.yml
-  when: ansible_facts['os_family'] == 'Debian'
+  when: ansible_facts['pkg_mgr'] == 'apt'
 - name: Create symlinks for scripts
   ansible.builtin.find:
     paths: "{{ role_path }}/files/scripts"
