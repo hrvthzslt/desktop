@@ -34,6 +34,9 @@ super + u
 super + s
     arandr
 
+super + v
+    pavucontrol
+
 super + o
     thunar
 

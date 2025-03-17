@@ -74,6 +74,7 @@ If you're not using a display manager, you can start the window manager with `st
 - **Super + N**: Network settings - Start _nmtui_ in a floating window
 - **Super + U**: Bluetooth settings - Start _bluetuith_ in a floating window
 - **Super + S**: Display settings - _arandr_
+- **Super + V**: Sound settings - _pavucontrol_
 - **Super + Shift + P**: Clipboard manager - _clipmenu_
 - **Super + Shift + C**: Turn off clipboard manager
 - **Super + C**: Clear clipboard
