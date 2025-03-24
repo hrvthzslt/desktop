@@ -1,18 +1,17 @@
 ---
-- name: check if installed
-  ansible.builtin.command: thorium-browser --version
-  register: thorium_version
-  ignore_errors: yes
-  changed_when: false
+- name: add Thorium APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [trusted=yes arch=amd64] https://dl.thorium.rocks/debian/ stable main"
+    state: present
+  become: yes
 
-- name: download installer
-  ansible.builtin.get_url:
-    url: "https://github.com/Alex313031/thorium/releases/download/M124.0.6367.218/thorium-browser_124.0.6367.218_AVX.deb"
-    dest: "{{ tmp_dir }}/thorium-browser.deb"
-  when: thorium_version.rc != 0
-
-- name: install
+- name: update package list
   ansible.builtin.apt:
-    deb: "{{ tmp_dir }}/thorium-browser.deb"
-  when: thorium_version.rc != 0
-  become: true
+    update_cache: yes
+  become: yes
+
+- name: install Thorium
+  ansible.builtin.apt:
+    name: thorium-browser
+    state: present
+  become: yes
