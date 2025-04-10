@@ -32,15 +32,15 @@
         dest: ~/.dwm/autostart.sh
         state: link
         force: yes
-      when: ansible_facts['distribution'] != "Debian"
+      when: ansible_facts['os_family'] == 'Debian'
 
-    - name: symlink config
-      ansible.builtin.file:
-        src: "{{ role_path }}/files/debian12/autostart.sh"
-        dest: ~/.dwm/autostart.sh
-        state: link
-        force: yes
-      when: ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_major_version'] == "12"
+    # - name: symlink config
+    #   ansible.builtin.file:
+    #     src: "{{ role_path }}/files/debian12/autostart.sh"
+    #     dest: ~/.dwm/autostart.sh
+    #     state: link
+    #     force: yes
+    #   when: ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_major_version'] == "12"
 
     - name: desktop entry
       ansible.builtin.copy:
