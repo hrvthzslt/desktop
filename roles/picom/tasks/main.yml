@@ -1,0 +1,16 @@
+- name: picom
+  tags:
+    - picom
+  block:
+    - name: install picom
+      ansible.builtin.apt:
+        name: picom
+        state: present
+      become: yes
+      when: ansible_facts['os_family'] == 'Debian'
+    - name: symlink base config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/picom.conf"
+        dest: ~/.config/picom.conf
+        state: link
+        force: yes
