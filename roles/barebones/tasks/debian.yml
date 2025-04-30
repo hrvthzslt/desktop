@@ -18,6 +18,8 @@
     - keychain
     - gmtp
     - gvfs-backends
+    - tlp
+    - tlp-rdw
   become: yes
 
 - name: Symlink xinitrc
