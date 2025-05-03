@@ -94,3 +94,7 @@ List of services that are set up for this desktop environment:
 - **Super + Shift + E**: Stop showing key presses - _screenkey_
 - **Super + O**: Open file browser - _thunar_
 - **Print**: Screenshot - _flameshot_
+
+## TODO
+
+Handle permissions with policykit-1
