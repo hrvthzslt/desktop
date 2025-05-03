@@ -63,3 +63,6 @@ super + e
 
 super + shift + e
     pkill screenkey
+
+super + shift + m
+    power set ; pkill -RTMIN+16 dwmblocks

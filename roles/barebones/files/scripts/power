@@ -1,22 +1,59 @@
 #!/bin/sh
-# Change the power mode of the CPU
+# Change the power mode with powerprofilesctl
 
 get_available_power_modes() {
-  cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
+  # cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
+  echo "performance balanced power-saver"
 }
 
-set_power_mode() {
-  echo "$1" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-}
-
-main() {
-  power_mode="$(get_available_power_modes | tr ' ' '\n' | fzf)"
+set_power() {
+  power_mode="$(get_available_power_modes | tr ' ' '\n' | dmenu -p "Power mode:")"
 
   if [ $? -eq 130 ]; then
     exit 130
   fi
 
-  set_power_mode "$power_mode"
+  # echo "$power_mode" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+  powerprofilesctl set "$power_mode"
 }
 
-main
+get() {
+  profile=$(powerprofilesctl list | awk '/\*/ {print $2}')
+  case $profile in
+    "balanced:")
+      echo " "
+      ;;
+    "performance:")
+      echo " "
+      ;;
+    "power-saver:")
+      echo " "
+      ;;
+  esac
+}
+
+help() {
+  echo "Usage: g [set|get|help]"
+  echo "  set   set power mode"
+  echo "  get   get current power mode"
+  echo "  help  print help"
+}
+
+main() {
+  case $1 in
+    set)
+      set_power
+      exit 0
+      ;;
+    get)
+      get
+      exit 0
+      ;;
+    *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+main "$1"

@@ -51,6 +51,14 @@ The installation process will create a new session in the display manager, calle
 
 If you're not using a display manager, you can start the window manager with `startx`, or run `make barebones`, which will configure **xinit** to start **dwm** in **tty1** automatically.
 
+## Services
+
+List of services that are set up for this desktop environment:
+
+- _keyd_ - keyboard remapping
+- _clipmenu_ - clipboard manager
+- _powerprofilesctl_ - power management
+
 ## Startup
 
 **dwm** is the entry point for the desktop environment and will start all the other tools.
@@ -75,6 +83,7 @@ If you're not using a display manager, you can start the window manager with `st
 - **Super + U**: Bluetooth settings - Start _bluetuith_ in a floating window
 - **Super + S**: Display settings - _arandr_
 - **Super + V**: Sound settings - _pavucontrol_
+- **Super + M**: Select power profile - _powerprofilesctl_
 - **Super + Shift + P**: Clipboard manager - _clipmenu_
 - **Super + Shift + C**: Turn off clipboard manager
 - **Super + C**: Clear clipboard

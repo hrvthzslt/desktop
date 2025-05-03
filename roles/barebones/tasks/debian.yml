@@ -18,8 +18,7 @@
     - keychain
     - gmtp
     - gvfs-backends
-    - tlp
-    - tlp-rdw
+    - power-profiles-daemon
   become: yes
 
 - name: Symlink xinitrc
