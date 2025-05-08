@@ -1,0 +1,19 @@
+#!/bin/sh
+
+main() {
+  option=$(printf "reboot\nshutdown" | dmenu)
+
+  case "$option" in
+    reboot)
+        systemctl reboot
+        ;;
+    shutdown)
+        sudo shutdown now
+        ;;
+    *)
+        exit 1
+        ;;
+  esac
+}
+
+main

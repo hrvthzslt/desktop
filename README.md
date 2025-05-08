@@ -84,6 +84,7 @@ List of services that are set up for this desktop environment:
 - **Super + S**: Display settings - _arandr_
 - **Super + V**: Sound settings - _pavucontrol_
 - **Super + M**: Select power profile - _powerprofilesctl_
+- **Super + Shift + D**: Reboot/Shutdown
 - **Super + Shift + P**: Clipboard manager - _clipmenu_
 - **Super + Shift + C**: Turn off clipboard manager
 - **Super + C**: Clear clipboard

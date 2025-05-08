@@ -22,6 +22,9 @@ super + shift + l
 super + shift + s
     slock & systemctl suspend
 
+super + shift + d
+    sysp
+
 super + r
     autorandr --change --force && nitrogen --restore
 
