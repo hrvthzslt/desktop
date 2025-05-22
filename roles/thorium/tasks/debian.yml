@@ -1,17 +1,26 @@
 ---
+- name: check thorium version
+  command: "thorium-browser --version"
+  register: thorium_version
+  ignore_errors: yes
+  changed_when: false
+
 - name: add Thorium APT repository
   ansible.builtin.apt_repository:
     repo: "deb [trusted=yes arch=amd64] https://dl.thorium.rocks/debian/ stable main"
     state: present
   become: yes
+  when: thorium_version.rc != 0
 
 - name: update package list
   ansible.builtin.apt:
     update_cache: yes
   become: yes
+  when: thorium_version.rc != 0
 
 - name: install Thorium
   ansible.builtin.apt:
     name: thorium-browser
     state: present
   become: yes
+  when: thorium_version.rc != 0
