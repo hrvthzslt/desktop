@@ -1,0 +1,20 @@
+---
+- name: symlink scripts
+  tags:
+    - scripts
+  block:
+    - name: make local bin folder
+      ansible.builtin.file:
+        path: "{{ local_bin_dir }}"
+        state: directory
+    - name: Create symlinks for scripts
+      ansible.builtin.find:
+        paths: "{{ role_path }}/files/scripts"
+        file_type: file
+      register: scripts_files
+    - name: symlink scripts to .local/bin
+      ansible.builtin.file:
+        src: "{{ item.path }}"
+        dest: "{{ ansible_env.HOME }}/.local/bin/{{ item.path | basename }}"
+        state: link
+      loop: "{{ scripts_files.files }}"

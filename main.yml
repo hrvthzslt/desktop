@@ -4,6 +4,7 @@
   roles:
     - dependencies
     - config
+    - scripts
     - keyd
     - sxhkd
     - fonts
