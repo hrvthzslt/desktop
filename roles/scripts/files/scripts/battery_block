@@ -1,6 +1,8 @@
 #!/bin/sh
 
-main() {
+. $HOME/.local/bin/internal
+
+get() {
     acpi_output=$(acpi -b)
     battery_perc="${acpi_output#*, }"
     battery_perc="${battery_perc%,*}"
@@ -16,4 +18,4 @@ main() {
     echo "$battery_perc $battery_symbol"
 }
 
-main
+main "󱊣"

@@ -1,7 +1,10 @@
 #!/bin/sh
 
-main() {
+
+. $HOME/.local/bin/internal
+
+get() {
   nmcli -t -f active,signal dev wifi | grep '^yes' | awk -F ':' '{printf "%d%%", $2}'
 }
 
-main
+main "󰖩"
