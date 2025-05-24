@@ -3,19 +3,22 @@
 . $HOME/.local/bin/internal
 
 get() {
-    acpi_output=$(acpi -b)
-    battery_perc="${acpi_output#*, }"
-    battery_perc="${battery_perc%,*}"
-    battery_status="${acpi_output#*: }"
-    battery_status="${battery_status%%,*}"
+  [ ! -f /sys/class/power_supply/BAT*/capacity ] && return 1
 
-    case $battery_status in
-        Discharging) battery_symbol="-" ;;
-        Charging) battery_symbol="+" ;;
-        *) battery_symbol="o" ;;
-    esac
+  acpi_output=$(acpi -b)
 
-    echo "$battery_perc $battery_symbol"
+  battery_perc="${acpi_output#*, }"
+  battery_perc="${battery_perc%,*}"
+  battery_status="${acpi_output#*: }"
+  battery_status="${battery_status%%,*}"
+
+  case $battery_status in
+    Discharging) battery_symbol="-" ;;
+    Charging) battery_symbol="+" ;;
+    *) battery_symbol="o" ;;
+  esac
+
+  echo "$battery_perc $battery_symbol"
 }
 
 main "󱊣"
