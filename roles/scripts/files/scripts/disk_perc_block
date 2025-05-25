@@ -1,7 +1,9 @@
 #!/bin/sh
 
-main() {
+. $HOME/.local/bin/internal
+
+get() {
   df -P / | awk 'NR==2 {print $5}'
 }
 
-main
+main ""

@@ -1,7 +1,9 @@
 #!/bin/sh
 
-main() {
+. $HOME/.local/bin/internal
+
+get() {
   bluetoothctl devices Connected | wc -l
 }
 
-main
+main "󰂯"

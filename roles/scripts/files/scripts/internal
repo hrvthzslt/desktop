@@ -1,0 +1,6 @@
+#!/bin/sh
+
+main() {
+  perc=$(get 2>/dev/null)
+  [ -n "$perc" ] && echo " $1 $perc"
+}
