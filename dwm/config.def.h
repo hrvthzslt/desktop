@@ -49,6 +49,7 @@ static const Rule rules[] = {
     { NULL,             NULL,       "Screen Layout Editor", 0,            1,           -1 },
     { NULL,             NULL,       "Volume Control",       0,            1,           -1 },
     { NULL,             NULL,       "Onboard",              0,            1,           -1 },
+    { NULL,             NULL,       "ColorPicker",          0,            1,           -1 },
 };
 
 /* layout(s) */
