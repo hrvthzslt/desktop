@@ -31,9 +31,9 @@
     - zip
     - unzip
     - onboard
-    - software-properties-common
     - color-picker
   become: yes
 
 - name: make brightnessctl runable without sudo
   ansible.builtin.shell: 'sudo chmod +s "$(which brightnessctl)"'
+  become: yes
