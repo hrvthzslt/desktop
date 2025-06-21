@@ -2,6 +2,13 @@
   tags:
     - config
   block:
+    - name: monitor config
+      ansible.builtin.copy:
+        src: "{{ role_path }}/files/touchpad/10-monitor.conf"
+        dest: "/etc/X11/xorg.conf.d/10-monitor.conf"
+        mode: 0644
+      become: yes
+
     - name: touchpad config
       ansible.builtin.copy:
         src: "{{ role_path }}/files/touchpad/30-touchpad.conf"
