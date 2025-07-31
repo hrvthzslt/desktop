@@ -2,8 +2,11 @@
 
 . $HOME/.local/bin/internal
 
-get() {
-  amixer get Master | grep -o '[0-9]*%' | head -n1
+volume() {
+    master=$(amixer get Master)
+    perc=$(echo "$master" | grep -o '[0-9]*%' | head -n1)
+    icon=$(echo "$master" | grep -q '\[off\]' && echo "󰖁" || echo "󰕾")
+    echo "$icon" "$perc"
 }
 
-main ""
+volume

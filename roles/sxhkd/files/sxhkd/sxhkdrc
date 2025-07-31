@@ -5,7 +5,7 @@ XF86AudioLowerVolume
     amixer sset Master 5%- ; pkill -RTMIN+14 dwmblocks
 
 XF86AudioMute
-    amixer sset Master 0% ; pkill -RTMIN+14 dwmblocks
+    amixer sset Master toggle ; pkill -RTMIN+14 dwmblocks
 
 XF86MonBrightnessUp
     brightnessctl set 5%+
