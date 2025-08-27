@@ -11,6 +11,7 @@
     - pavucontrol
     - pulseaudio-module-bluetooth
     - bluez
+    - bluez-firmware
     - bluetooth
     - blueman
     - xinit
