@@ -1,14 +1,31 @@
 ---
 - name: install dependencies
+  tags:
+    - install
   ansible.builtin.import_tasks:
     file: debian.yml
   when: ansible_facts['pkg_mgr'] == 'apt'
+
+- name: Symlink xinitrc
+  tags:
+    - link
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/xinit/.xinitrc"
+    dest: ~/.xinitrc
+    state: link
+    force: yes
+
 - name: Create symlinks for scripts
+  tags:
+    - link
   ansible.builtin.find:
     paths: "{{ role_path }}/files/scripts"
     file_type: file
   register: scripts_files
+
 - name: symlink scripts to .local/bin
+  tags:
+    - link
   ansible.builtin.file:
     src: "{{ item.path }}"
     dest: "{{ ansible_env.HOME }}/.local/bin/{{ item.path | basename }}"
