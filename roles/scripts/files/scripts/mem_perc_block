@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $HOME/.local/bin/internal
+. "$HOME"/.local/bin/internal
 
 get() {
   free | grep Mem | awk '{printf "%.0f%%", $3/$2 * 100.0}'

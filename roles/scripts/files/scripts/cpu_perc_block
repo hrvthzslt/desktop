@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $HOME/.local/bin/internal
+. "$HOME"/.local/bin/internal
 
 get() {
   iostat -c | awk 'NR>= 4 && NR<=4' | awk '{printf "%.0f%%", $1}'

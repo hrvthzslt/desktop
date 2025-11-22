@@ -1,14 +1,14 @@
 #!/bin/sh
 
-. $HOME/.local/bin/internal
+. "$HOME"/.local/bin/internal
 
 get() {
-  [ ! -f /sys/class/power_supply/BAT*/capacity ] && return 1
+  [ ! -f /sys/class/power_supply/BAT0/capacity ] && return 1
 
   acpi_output=$(acpi -b)
 
   battery_perc="${acpi_output#*, }"
-  battery_perc="${battery_perc%,*}"
+  battery_perc="${battery_perc%%,*}"
   battery_status="${acpi_output#*: }"
   battery_status="${battery_status%%,*}"
 
