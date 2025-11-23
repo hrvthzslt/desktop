@@ -33,7 +33,7 @@ get() {
 }
 
 help() {
-  echo "Usage: g [set|get|help]"
+  echo "Usage: power [set|get|help]"
   echo "  set   set power mode"
   echo "  get   get current power mode"
   echo "  help  print help"
