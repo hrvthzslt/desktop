@@ -69,3 +69,6 @@ super + shift + e
 
 super + shift + m
     power set ; pkill -RTMIN+16 dwmblocks
+
+super + z
+    keymap switch ; pkill -RTMIN+18 dwmblocks
