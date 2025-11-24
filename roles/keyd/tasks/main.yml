@@ -56,3 +56,11 @@
         state: link
         follow: no
         force: yes
+    - name: symlink hhkb config
+      become: yes
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/keyd/hhkb.conf"
+        dest: /etc/keyd/hhkb.conf
+        state: link
+        follow: no
+        force: yes
