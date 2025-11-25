@@ -8,14 +8,14 @@ static const Block blocks[] = {
     {"", "", 0, 0},
 
     {"", "clipctl_status_block", 0, 10},
-    {" ", "dunst_status_block", 0, 12},
+    {"", "dunst_status_block", 0, 12},
 
-    {"", "alsa_perc_block", 5, 14},
+    {" ", "alsa_perc_block", 5, 14},
     {"", "wifi_perc_block", 5, 0},
     {"", "bluetooth_count_block", 5, 0},
     {"", "battery_block", 1, 0},
-    {"", "keymap icon", 0, 18},
     {"", "power get", 0, 16},
+    {" ", "keymap icon", 0, 18},
 
     {"", "", 0, 0},
 
