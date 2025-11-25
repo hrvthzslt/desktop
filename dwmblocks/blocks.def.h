@@ -15,7 +15,7 @@ static const Block blocks[] = {
     {"", "bluetooth_count_block", 5, 0},
     {"", "battery_block", 1, 0},
     {"", "power get", 0, 16},
-    {" ", "keymap icon", 0, 18},
+    {" ", "keemap icon", 0, 18},
 
     {"", "", 0, 0},
 

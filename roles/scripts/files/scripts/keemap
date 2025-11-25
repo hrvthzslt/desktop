@@ -40,9 +40,9 @@ get_icon() {
 }
 
 help() {
-  echo "Usage: keymap [switch|get|help]"
+  echo "Usage: keemap [switch|get|icon|help]"
   echo "  switch    switch keymap between us and hu"
-  echo "  get       get current power mode"
+  echo "  get       get current keymap layout"
   echo "  icon      get keymap icon"
   echo "  help      print help"
 }
