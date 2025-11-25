@@ -94,4 +94,5 @@ List of services that are set up for this desktop environment:
 - **Super + E**: Show key presses - _screenkey_
 - **Super + Shift + E**: Stop showing key presses - _screenkey_
 - **Super + O**: Open file browser - _thunar_
+- **Super + Shift + L**: Switch keyboard language between us and hu - _setxkbmap_
 - **Print**: Screenshot - _flameshot_

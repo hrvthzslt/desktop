@@ -16,7 +16,7 @@ XF86MonBrightnessDown
 Print
     flameshot gui
 
-super + shift + l
+super + Escape
     slock
 
 super + shift + s
@@ -70,5 +70,5 @@ super + shift + e
 super + shift + m
     power set ; pkill -RTMIN+16 dwmblocks
 
-super + z
+super + shift + l
     keemap switch ; pkill -RTMIN+18 dwmblocks
