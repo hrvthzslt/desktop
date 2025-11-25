@@ -1,0 +1,50 @@
+#!/bin/sh
+
+main() {
+  case $1 in
+    switch)
+      switch_keymap
+      exit 0
+      ;;
+    get)
+      get_keymap
+      exit 0
+      ;;
+    icon)
+      get_icon
+      exit 0
+      ;;
+    *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+switch_keymap() {
+  current_layout=$(get_keymap)
+  if [ "$current_layout" = "us" ]; then
+    setxkbmap hu
+  else
+    # setxkbmap -layout us -variant altgr-intl -option nodeadkeys
+    setxkbmap us
+  fi
+}
+
+get_keymap() {
+  setxkbmap -query | grep layout | awk '{print $2}'
+}
+
+get_icon() {
+  echo "󰌌 $(get_keymap)"
+}
+
+help() {
+  echo "Usage: keemap [switch|get|icon|help]"
+  echo "  switch    switch keymap between us and hu"
+  echo "  get       get current keymap layout"
+  echo "  icon      get keymap icon"
+  echo "  help      print help"
+}
+
+main "$1"
