@@ -5,7 +5,7 @@ main() {
 
   case "$option" in
     reboot)
-        systemctl reboot
+        systemctl soft-reboot
         ;;
     shutdown)
         sudo shutdown now
