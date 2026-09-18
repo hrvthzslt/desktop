@@ -1,0 +1,47 @@
+#!/bin/sh
+
+main() {
+  case $1 in
+    inc)
+      increase_brightness
+      exit 0
+      ;;
+    dec)
+      decrease_brightness
+      exit 0
+      ;;
+    help | *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+change_brightness() {
+  # Internal display
+  brightnessctl set 5%"$1"
+
+  # External displays
+  displays=$(ddcutil detect 2>/dev/null | awk '/^Display/ {print $2}')
+
+  for disp in $displays; do
+    ddcutil --fast --display "$disp" setvcp 10 "$1" 5
+  done
+}
+
+increase_brightness() {
+  change_brightness +
+}
+
+decrease_brightness() {
+  change_brightness -
+}
+
+help() {
+  echo "Usage: brightness [inc|dec|help]"
+  echo "  inc       increase brightness"
+  echo "  dec       decrease brightness"
+  echo "  help      print help"
+}
+
+main "$1"
