@@ -17,6 +17,7 @@
     - lm-sensors
     - sysstat
     - acpi
+    - ddcutil
     - nitrogen
     - arandr
     - autorandr

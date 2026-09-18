@@ -8,10 +8,10 @@ XF86AudioMute
     amixer sset Master toggle ; pkill -RTMIN+14 dwmblocks
 
 XF86MonBrightnessUp
-    brightnessctl set 5%+
+    brightnessctl set 5%+ && ddcutil --display 1 setvcp 10 + 5
 
 XF86MonBrightnessDown
-    brightnessctl set 5%-
+    brightnessctl set 5%- && ddcutil --display 1 setvcp 10 - 5
 
 Print
     flameshot gui
