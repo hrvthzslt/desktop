@@ -95,4 +95,6 @@ List of services that are set up for this desktop environment:
 - **Super + Shift + E**: Stop showing key presses - _screenkey_
 - **Super + O**: Open file browser - _thunar_
 - **Super + Shift + L**: Switch keyboard language between us and hu - _setxkbmap_
+- **BrightnessUp**: Increase brightness - _brightnessctl_ for internal, _ddcutil_ for external monitors
+- **BrightnessDown**: Decrease brightness - _brightnessctl_ for internal, _ddcutil_ for external monitors
 - **Print**: Screenshot - _flameshot_
