@@ -10,7 +10,11 @@ main() {
       decrease_brightness
       exit 0
       ;;
-    help | *)
+    help)
+      help
+      exit 0
+      ;;
+    *)
       help
       exit 1
       ;;
