@@ -25,7 +25,7 @@ change_brightness() {
   displays=$(ddcutil detect 2>/dev/null | awk '/^Display/ {print $2}')
 
   for disp in $displays; do
-    ddcutil --fast --display "$disp" setvcp 10 "$1" 5
+    ddcutil --display "$disp" setvcp 10 "$1" 5
   done
 }
 
