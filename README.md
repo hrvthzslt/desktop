@@ -99,3 +99,10 @@ List of services that are set up for this desktop environment:
 - **BrightnessUp**: Increase brightness - _brightnessctl_ for internal, _ddcutil_ for external monitors
 - **BrightnessDown**: Decrease brightness - _brightnessctl_ for internal, _ddcutil_ for external monitors
 - **Print**: Screenshot - _flameshot_
+
+## TODO
+
+- Remove the autostart patch
+- Switch clipboard shortcuts
+- Add notifications
+- Start Xorg from kmscon
