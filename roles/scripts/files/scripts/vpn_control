@@ -1,0 +1,49 @@
+#!/bin/sh
+
+main() {
+  case $1 in
+    status)
+      status
+      exit 0
+      ;;
+    switch)
+      switch
+      exit 0
+      ;;
+    *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+switch() {
+  if ! command -v tailscale >/dev/null; then
+    exit 1
+  fi
+
+  if tailscale status >/dev/null; then
+    tailscale down
+  else
+    tailscale up
+  fi
+}
+
+status() {
+  if ! ip route show default | grep default >/dev/null; then
+    echo "󰍸"
+  elif command -v tailscale >/dev/null && tailscale status >/dev/null; then
+    echo "󰒄"
+  else
+    echo "󰐚"
+  fi
+}
+
+help() {
+  echo "Usage: vpn_control [status|switch|help]"
+  echo "  status    show vpn status"
+  echo "  switch    switch vpn on/off"
+  echo "  help      print help"
+}
+
+main "$1"
