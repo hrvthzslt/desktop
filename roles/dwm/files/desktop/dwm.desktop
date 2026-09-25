@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Dwm
 Comment=dynamic window manager
-Exec=dwm
+Exec=sh -c '$HOME/.dwm/autostart.sh; exec dwm'
 Icon=dwm
 Type=XSession
 
