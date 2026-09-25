@@ -102,7 +102,6 @@ List of services that are set up for this desktop environment:
 
 ## TODO
 
-- Remove the autostart patch
 - Switch clipboard shortcuts
 - Add notifications
 - Start Xorg from kmscon
