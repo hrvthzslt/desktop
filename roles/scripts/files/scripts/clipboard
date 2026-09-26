@@ -1,0 +1,41 @@
+#!/bin/sh
+
+main() {
+  case $1 in
+    toggle)
+      toggle
+      exit 0
+      ;;
+    clear)
+      clear
+      exit 0
+      ;;
+    help)
+      help
+      exit 0
+      ;;
+    *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+toggle() {
+  clipctl toggle
+  notify-send "Clipboard" "$(clipctl status)"
+}
+
+clear() {
+  clipdel -d ".*"
+  notify-send "Clipboard" "Cleared"
+}
+
+help() {
+  echo "Usage: clipboard [toggle|clear|help]"
+  echo "  toggle    toggle clipboard manager"
+  echo "  clear     clear clipboard history"
+  echo "  help      print help"
+}
+
+main "$1"
