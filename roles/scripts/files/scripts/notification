@@ -23,7 +23,7 @@ main() {
 
 toggle() {
   dunstctl set-paused toggle
-  notify-send "Notifications" "Enabled"
+  notify-send -h string:x-dunst-stack-tag:notification "Notifications" "Toggled"
 }
 
 close() {
