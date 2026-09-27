@@ -37,20 +37,14 @@
     insertafter: EOF
     create: yes
 
-- name: Check if rpi imager installed
-  ansible.builtin.command: rpi-imager --version
-  register: rpi_imager_version
-  ignore_errors: yes
-  changed_when: false
+- name: Ensure ~/.config/dunst exists
+  ansible.builtin.file:
+    path: ~/.config/dunst
+    state: directory
 
-- name: Download rpi imager
-  ansible.builtin.get_url:
-    url: https://downloads.raspberrypi.org/imager/imager_latest_amd64.deb
-    dest: /tmp/imager_latest_amd64.deb
-  when: rpi_imager_version.rc != 0
-
-- name: Install rpi imager
-  ansible.builtin.apt:
-    deb: /tmp/imager_latest_amd64.deb
-  become: yes
-  when: rpi_imager_version.rc != 0
+- name: Symlink dunstrc
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/dunst/dunstrc"
+    dest: ~/.config/dunst/dunstrc
+    state: link
+    force: yes
