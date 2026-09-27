@@ -43,3 +43,11 @@ barebones: # Install additional packages for a barebones system
 
 ssh: # Create new ssh key, if needed
 	ansible-playbook ssh.yml
+
+lint: # Run shellcheck on scripts
+	shellcheck roles/scripts/files/scripts/*
+
+pre-commit-hook: # Add pre-commit hook running shellcheck on scripts
+	@echo '#!/bin/sh' > .git/hooks/pre-commit
+	@echo 'shellcheck roles/scripts/files/scripts/*' >> .git/hooks/pre-commit
+	@chmod +x .git/hooks/pre-commit
