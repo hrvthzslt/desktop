@@ -53,10 +53,10 @@ super + shift + c
     clipboard clear
 
 super + a
-    dunstctl close
+    notification close
 
 super + shift + a
-    dunstctl set-paused toggle ; pkill -RTMIN+12 dwmblocks
+    notification toggle ; pkill -RTMIN+12 dwmblocks
 
 super + w
     thorium-browser

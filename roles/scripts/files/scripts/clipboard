@@ -21,14 +21,18 @@ main() {
   esac
 }
 
+send_notification() {
+  notify-send -h string:x-dunst-stack-tag:clipboard "Clipboard" "$1"
+}
+
 toggle() {
   clipctl toggle
-  notify-send "Clipboard" "$(clipctl status)"
+  send_notification "$(clipctl status)"
 }
 
 clear() {
   clipdel -d ".*"
-  notify-send "Clipboard" "Cleared"
+  send_notification "Cleared"
 }
 
 help() {

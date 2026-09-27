@@ -17,15 +17,22 @@ main() {
   esac
 }
 
+send_notification() {
+  notify-send -h string:x-dunst-stack-tag:vpn "Vpn" "$1"
+}
+
 switch() {
   if ! command -v tailscale >/dev/null; then
+    send_notification "Tailscale is not installed"
     exit 1
   fi
 
   if tailscale status >/dev/null; then
     tailscale down
+    send_notification "Tailscale deactivated"
   else
     tailscale up
+    send_notification "Tailscale activated"
   fi
 }
 

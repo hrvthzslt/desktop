@@ -1,0 +1,40 @@
+#!/bin/sh
+
+main() {
+  case $1 in
+    toggle)
+      toggle
+      exit 0
+      ;;
+    close)
+      close
+      exit 0
+      ;;
+    help)
+      help
+      exit 0
+      ;;
+    *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+toggle() {
+  dunstctl set-paused toggle
+  notify-send "Notifications" "Enabled"
+}
+
+close() {
+  dunstctl close-all
+}
+
+help() {
+  echo "Usage: notification [toggle|close|help]"
+  echo "  toggle    toggle notifications on/off"
+  echo "  close     close all notifications"
+  echo "  help      print help"
+}
+
+main "$1"

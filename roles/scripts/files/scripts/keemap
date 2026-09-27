@@ -21,13 +21,19 @@ main() {
   esac
 }
 
+send_notification() {
+  notify-send -h string:x-dunst-stack-tag:keymap "Keymap" "$1"
+}
+
 switch_keymap() {
   current_layout=$(get_keymap)
   if [ "$current_layout" = "us" ]; then
     setxkbmap hu
+    send_notification "HU"
   else
     # setxkbmap -layout us -variant altgr-intl -option nodeadkeys
     setxkbmap us
+    send_notification "US"
   fi
 }
 
