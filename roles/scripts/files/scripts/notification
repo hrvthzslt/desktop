@@ -10,6 +10,10 @@ main() {
       close
       exit 0
       ;;
+    status)
+      status
+      exit 0
+      ;;
     help)
       help
       exit 0
@@ -30,10 +34,15 @@ close() {
   dunstctl close-all
 }
 
+status() {
+  [ "$(dunstctl is-paused)" = 'false' ] && echo 󰎚 || echo 󱞃
+}
+
 help() {
   echo "Usage: notification [toggle|close|help]"
   echo "  toggle    toggle notifications on/off"
   echo "  close     close all notifications"
+  echo "  status    show notification status"
   echo "  help      print help"
 }
 

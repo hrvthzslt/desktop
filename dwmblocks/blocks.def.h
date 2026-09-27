@@ -8,7 +8,7 @@ static const Block blocks[] = {
     {"", "", 0, 0},
 
     {"", "clipctl_status_block", 0, 10},
-    {"", "dunst_status_block", 0, 12},
+    {"", "notification status", 0, 12},
     {"", "vpn_control status", 30, 20},
 
     {" ", "alsa_perc_block", 5, 14},

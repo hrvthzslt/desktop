@@ -18,7 +18,7 @@ main() {
 }
 
 send_notification() {
-  notify-send -h string:x-dunst-stack-tag:vpn "Vpn" "$1"
+  notify-send -h string:x-dunst-stack-tag:vpn "VPN" "$1"
 }
 
 switch() {
