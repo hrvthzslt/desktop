@@ -35,10 +35,20 @@ change_brightness() {
 
 increase_brightness() {
   change_brightness +
+  progress_bar
 }
 
 decrease_brightness() {
   change_brightness -
+  progress_bar
+}
+
+progress_bar() {
+  notify-send "Brightness" -h string:x-dunst-stack-tag:brightness -h int:value:"$(get_brightness_percentage)"
+}
+
+get_brightness_percentage() {
+  echo $(($(brightnessctl get) * 100 / $(brightnessctl max))) || ddcutil getvcp 10
 }
 
 help() {
