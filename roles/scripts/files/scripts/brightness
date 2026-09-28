@@ -17,12 +17,16 @@ main() {
   esac
 }
 
+get_external_displays() {
+  ddcutil detect 2>/dev/null | awk '/^Display/ {print $2}'
+}
+
 change_brightness() {
   # Internal display
   brightnessctl set 5%"$1"
 
   # External displays
-  displays=$(ddcutil detect 2>/dev/null | awk '/^Display/ {print $2}')
+  displays=$(get_external_displays)
 
   for disp in $displays; do
     ddcutil --display "$disp" setvcp 10 "$1" 5
@@ -42,13 +46,14 @@ progress_bar() {
 }
 
 get_brightness_percentage() {
-  current="$(brightnessctl get 2>/dev/null)"
-  max="$(brightnessctl max 2>/dev/null)"
+  displays=$(get_external_displays)
 
-  if [ -n "$current" ] && [ -n "$max" ]; then
-    percentage=$((current * 100 / max))
+  if [ -z "$displays" ]; then
+    percentage=$(($(brightnessctl get) * 100 / $(brightnessctl max)))
   else
-    percentage=$(ddcutil getvcp 10)
+    display=$(printf '%s\n' "$displays" | awk 'NR == 1 {print; exit}')
+    percentage=$(ddcutil --display "$display" getvcp 10 2>/dev/null |
+      awk -F'[=,]' '/current value/ {print $2 * 100 / $4; exit}')
   fi
 
   echo "$percentage"
