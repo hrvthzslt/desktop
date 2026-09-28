@@ -25,9 +25,12 @@ main() {
   esac
 }
 
+send_notification() {
+  notify-send -h string:x-dunst-stack-tag:notification "Notifications" "$1"
+}
+
 toggle() {
-  dunstctl set-paused toggle
-  notify-send -h string:x-dunst-stack-tag:notification "Notifications" "Toggled"
+  dunstctl set-paused toggle && send_notification "Toggled"
 }
 
 close() {

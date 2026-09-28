@@ -26,13 +26,11 @@ main() {
 }
 
 increase() {
-  amixer sset Master 5%+
-  progress_bar
+  amixer sset Master 5%+ && progress_bar
 }
 
 decrease() {
-  amixer sset Master 5%-
-  progress_bar
+  amixer sset Master 5%- && progress_bar
 }
 
 progress_bar() {

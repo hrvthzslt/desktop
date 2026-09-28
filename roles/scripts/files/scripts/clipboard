@@ -26,13 +26,11 @@ send_notification() {
 }
 
 toggle() {
-  clipctl toggle
-  send_notification "$(clipctl status)"
+  clipctl toggle && send_notification "$(clipctl status)"
 }
 
 clear() {
-  clipdel -d ".*"
-  send_notification "Cleared"
+  clipdel -d ".*" && send_notification "Cleared"
 }
 
 help() {

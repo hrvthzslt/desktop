@@ -34,13 +34,11 @@ change_brightness() {
 }
 
 increase_brightness() {
-  change_brightness +
-  progress_bar
+  change_brightness + && progress_bar
 }
 
 decrease_brightness() {
-  change_brightness -
-  progress_bar
+  change_brightness - && progress_bar
 }
 
 progress_bar() {

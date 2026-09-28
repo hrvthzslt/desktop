@@ -28,11 +28,9 @@ switch() {
   fi
 
   if tailscale status >/dev/null; then
-    tailscale down
-    send_notification "Tailscale deactivated"
+    tailscale down && send_notification "Tailscale deactivated"
   else
-    tailscale up
-    send_notification "Tailscale activated"
+    tailscale up && send_notification "Tailscale activated"
   fi
 }
 
