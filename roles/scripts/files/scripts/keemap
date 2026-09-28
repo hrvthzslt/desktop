@@ -28,10 +28,10 @@ send_notification() {
 switch_keymap() {
   current_layout=$(get_keymap)
   if [ "$current_layout" = "us" ]; then
-    setxkbmap hu && send_notification "HU"
+    setxkbmap hu && send_notification "hu"
   else
     # setxkbmap -layout us -variant altgr-intl -option nodeadkeys
-    setxkbmap us && send_notification "US"
+    setxkbmap us && send_notification "us"
   fi
 }
 
