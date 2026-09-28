@@ -46,8 +46,12 @@ progress_bar() {
 }
 
 get_brightness_percentage() {
-  percentage=$(($(brightnessctl get) * 100 / $(brightnessctl max)))
-  if [ -z "$percentage" ]; then
+  current="$(brightnessctl get 2>/dev/null)"
+  max="$(brightnessctl max 2>/dev/null)"
+
+  if [ -n "$current" ] && [ -n "$max" ]; then
+    percentage=$((current * 100 / max))
+  else
     percentage=$(ddcutil getvcp 10)
   fi
 
