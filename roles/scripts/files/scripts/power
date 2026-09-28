@@ -7,7 +7,7 @@ get_available_power_modes() {
 }
 
 send_notification() {
-  powerprofilesctl set "$power_mode" && notify-send -h string:x-dunst-stack-tag:power "Power profile" "Set to $1"
+  notify-send -h string:x-dunst-stack-tag:power "Power profile" "Set to $1"
 }
 
 set_power() {
