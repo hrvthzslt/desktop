@@ -1,0 +1,38 @@
+#!/bin/sh
+
+main() {
+  case $1 in
+    toggle)
+      toggle
+      exit 0
+      ;;
+    clear)
+      clear
+      exit 0
+      ;;
+    *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+send_notification() {
+  notify-send -h string:x-dunst-stack-tag:clipboard "Clipboard" "$1"
+}
+
+toggle() {
+  clipctl toggle && send_notification "$(clipctl status)"
+}
+
+clear() {
+  clipdel -d ".*" && send_notification "Cleared"
+}
+
+help() {
+  echo "Usage: clipboard [toggle|clear]"
+  echo "  toggle    toggle clipboard manager"
+  echo "  clear     clear clipboard history"
+}
+
+main "$1"

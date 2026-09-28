@@ -1,0 +1,69 @@
+#!/bin/sh
+
+main() {
+  case $1 in
+    inc)
+      increase
+      exit 0
+      ;;
+    dec)
+      decrease
+      exit 0
+      ;;
+    toggle)
+      toggle
+      exit 0
+      ;;
+    get)
+      get
+      exit 0
+      ;;
+    *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+increase() {
+  amixer sset Master 5%+ && progress_bar
+}
+
+decrease() {
+  amixer sset Master 5%- && progress_bar
+}
+
+progress_bar() {
+  notify-send "Volume" -h string:x-dunst-stack-tag:volume -h int:value:"$(get_percent)"
+}
+
+toggle() {
+  amixer sset Master toggle
+  notify-send "Volume" -h string:x-dunst-stack-tag:volume "$(get_status)"
+}
+
+get_percent() {
+  amixer get Master | grep -o '[0-9]*%' | head -n1
+}
+
+get_status() {
+  amixer get Master | grep -q '\[off\]' && echo "Muted" || echo "Unmuted"
+}
+
+get_icon() {
+  amixer get Master | grep -q '\[off\]' && echo "󰖁" || echo "󰕾"
+}
+
+get() {
+  echo "$(get_icon)" "$(get_percent)"
+}
+
+help() {
+  echo "Usage: volume [inc|dec|toggle|get]"
+  echo "  inc       increase volume"
+  echo "  dec       decrease volume"
+  echo "  toggle    toggle mute"
+  echo "  get       get current volume and mute status"
+}
+
+main "$1"

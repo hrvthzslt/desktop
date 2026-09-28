@@ -6,15 +6,20 @@ get_available_power_modes() {
   echo "performance balanced power-saver"
 }
 
+send_notification() {
+  notify-send -h string:x-dunst-stack-tag:power "Power profile" "Set to $1"
+}
+
 set_power() {
   power_mode="$(get_available_power_modes | tr ' ' '\n' | dmenu -p "Power mode:")"
 
-  if [ $? -eq 130 ]; then
+  # exit if dmenu is cancelled or nothing is selected
+  if [ $? -eq 130 ] || [ -z "$power_mode" ]; then
     exit 130
   fi
 
   # echo "$power_mode" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-  powerprofilesctl set "$power_mode"
+  powerprofilesctl set "$power_mode" && send_notification "$power_mode"
 }
 
 get() {
@@ -33,10 +38,9 @@ get() {
 }
 
 help() {
-  echo "Usage: power [set|get|help]"
+  echo "Usage: power [set|get]"
   echo "  set   set power mode"
   echo "  get   get current power mode"
-  echo "  help  print help"
 }
 
 main() {

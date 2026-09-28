@@ -10,10 +10,6 @@ main() {
       decrease_brightness
       exit 0
       ;;
-    help)
-      help
-      exit 0
-      ;;
     *)
       help
       exit 1
@@ -21,12 +17,16 @@ main() {
   esac
 }
 
+get_external_displays() {
+  ddcutil detect 2>/dev/null | awk '/^Display/ {print $2}'
+}
+
 change_brightness() {
   # Internal display
   brightnessctl set 5%"$1"
 
   # External displays
-  displays=$(ddcutil detect 2>/dev/null | awk '/^Display/ {print $2}')
+  displays=$(get_external_displays)
 
   for disp in $displays; do
     ddcutil --display "$disp" setvcp 10 "$1" 5
@@ -34,18 +34,35 @@ change_brightness() {
 }
 
 increase_brightness() {
-  change_brightness +
+  change_brightness + && progress_bar
 }
 
 decrease_brightness() {
-  change_brightness -
+  change_brightness - && progress_bar
+}
+
+progress_bar() {
+  notify-send "Brightness" -h string:x-dunst-stack-tag:brightness -h int:value:"$(get_brightness_percentage)"
+}
+
+get_brightness_percentage() {
+  displays=$(get_external_displays)
+
+  if [ -z "$displays" ]; then
+    percentage=$(($(brightnessctl get) * 100 / $(brightnessctl max)))
+  else
+    display=$(printf '%s\n' "$displays" | awk 'NR == 1 {print; exit}')
+    percentage=$(ddcutil --display "$display" getvcp 10 2>/dev/null |
+      awk -F'[=,]' '/current value/ {print $2 * 100 / $4; exit}')
+  fi
+
+  echo "$percentage"
 }
 
 help() {
-  echo "Usage: brightness [inc|dec|help]"
+  echo "Usage: brightness [inc|dec]"
   echo "  inc       increase brightness"
   echo "  dec       decrease brightness"
-  echo "  help      print help"
 }
 
 main "$1"

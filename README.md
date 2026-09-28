@@ -86,8 +86,8 @@ List of services that are set up for this desktop environment:
 - **Super + M**: Select power profile - _powerprofilesctl_
 - **Super + Shift + D**: Reboot/Shutdown
 - **Super + Shift + P**: Clipboard manager - _clipmenu_
-- **Super + Shift + C**: Turn off clipboard manager
-- **Super + C**: Clear clipboard
+- **Super + C**: Toggle clipboard manager
+- **Super + Shift + C**: Clear clipboard
 - **Super + A**: Close notification - _dunst_
 - **Super + Shift + A**: Pause notifications - _dunst_
 - **Super + W**: Open web browser - _thorium_
@@ -102,6 +102,5 @@ List of services that are set up for this desktop environment:
 
 ## TODO
 
-- Switch clipboard shortcuts
-- Add notifications
+- Unify sxhkd and dwmblocks command calls by arranging them to scripts
 - Start Xorg from kmscon

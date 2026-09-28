@@ -1,0 +1,47 @@
+#!/bin/sh
+
+main() {
+  case $1 in
+    toggle)
+      toggle
+      exit 0
+      ;;
+    close)
+      close
+      exit 0
+      ;;
+    status)
+      status
+      exit 0
+      ;;
+    *)
+      help
+      exit 1
+      ;;
+  esac
+}
+
+send_notification() {
+  notify-send -h string:x-dunst-stack-tag:notification "Notifications" "$1"
+}
+
+toggle() {
+  dunstctl set-paused toggle && send_notification "Toggled"
+}
+
+close() {
+  dunstctl close-all
+}
+
+status() {
+  [ "$(dunstctl is-paused)" = 'false' ] && echo 󰎚 || echo 󱞃
+}
+
+help() {
+  echo "Usage: notification [toggle|close]"
+  echo "  toggle    toggle notifications on/off"
+  echo "  close     close all notifications"
+  echo "  status    show notification status"
+}
+
+main "$1"

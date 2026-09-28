@@ -1,7 +1,0 @@
-#!/bin/sh
-
-main() {
-  [ "$(dunstctl is-paused)" = 'false' ] && echo 󰎚 || echo 󱞃
-}
-
-main
