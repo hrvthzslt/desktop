@@ -102,6 +102,5 @@ List of services that are set up for this desktop environment:
 
 ## TODO
 
-- Switch clipboard shortcuts
-- Add notifications
+- Unify sxhkd and dwmblocks command calls by arranging them to scripts
 - Start Xorg from kmscon
