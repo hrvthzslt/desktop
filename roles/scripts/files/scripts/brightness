@@ -10,10 +10,6 @@ main() {
       decrease_brightness
       exit 0
       ;;
-    help)
-      help
-      exit 0
-      ;;
     *)
       help
       exit 1
@@ -59,10 +55,9 @@ get_brightness_percentage() {
 }
 
 help() {
-  echo "Usage: brightness [inc|dec|help]"
+  echo "Usage: brightness [inc|dec]"
   echo "  inc       increase brightness"
   echo "  dec       decrease brightness"
-  echo "  help      print help"
 }
 
 main "$1"

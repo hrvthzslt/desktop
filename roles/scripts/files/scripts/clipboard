@@ -10,10 +10,6 @@ main() {
       clear
       exit 0
       ;;
-    help)
-      help
-      exit 0
-      ;;
     *)
       help
       exit 1
@@ -34,10 +30,9 @@ clear() {
 }
 
 help() {
-  echo "Usage: clipboard [toggle|clear|help]"
+  echo "Usage: clipboard [toggle|clear]"
   echo "  toggle    toggle clipboard manager"
   echo "  clear     clear clipboard history"
-  echo "  help      print help"
 }
 
 main "$1"
