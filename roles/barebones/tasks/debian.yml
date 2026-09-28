@@ -36,15 +36,3 @@
     state: present
     insertafter: EOF
     create: yes
-
-- name: Ensure ~/.config/dunst exists
-  ansible.builtin.file:
-    path: ~/.config/dunst
-    state: directory
-
-- name: Symlink dunstrc
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/dunst/dunstrc"
-    dest: ~/.config/dunst/dunstrc
-    state: link
-    force: yes

@@ -1,7 +1,19 @@
 ---
 - name: install dependencies
-  ansible.builtin.import_tasks:
-    file: debian.yml
-  when: ansible_facts['pkg_mgr'] == 'apt'
   tags:
     - dependencies
+  block:
+  - name: Import debian tasks
+    ansible.builtin.import_tasks:
+      file: debian.yml
+    when: ansible_facts['pkg_mgr'] == 'apt'
+  - name: Ensure ~/.config/dunst exists
+    ansible.builtin.file:
+      path: ~/.config/dunst
+      state: directory
+  - name: Symlink dunstrc
+    ansible.builtin.file:
+      src: "{{ role_path }}/files/dunst/dunstrc"
+      dest: ~/.config/dunst/dunstrc
+      state: link
+      force: yes
