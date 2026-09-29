@@ -18,6 +18,7 @@
     - sysstat
     - acpi
     - ddcutil
+    - ncdu
     - nitrogen
     - arandr
     - autorandr

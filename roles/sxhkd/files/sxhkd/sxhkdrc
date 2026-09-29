@@ -34,6 +34,9 @@ super + n
 super + u
     alacritty --title bluetuith --command bluetuith
 
+super + shift + n
+    alacritty --title ncdu --command ncdu "$HOME"
+
 super + s
     arandr
 

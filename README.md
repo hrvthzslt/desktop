@@ -80,6 +80,7 @@ List of services that are set up for this desktop environment:
 - **Super + Shift + S**: Lock and suspend
 - **Super + R**: Restore monitor configuration
 - **Super + N**: Network settings - Start _nmtui_ in a floating window
+- **Super + Shift N**: Disk Usage - Start _ncdu_ in a floating window
 - **Super + U**: Bluetooth settings - Start _bluetuith_ in a floating window
 - **Super + S**: Display settings - _arandr_
 - **Super + V**: Sound settings - _pavucontrol_
