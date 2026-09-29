@@ -2,7 +2,6 @@
 Encoding=UTF-8
 Name=Dwm
 Comment=dynamic window manager
-Exec=sh -c '$HOME/.dwm/autostart.sh; exec dwm'
+Exec=sh -c "$HOME/.dwm/autostart.sh; exec dwm >"$HOME"/.dwm/log"
 Icon=dwm
 Type=XSession
-
