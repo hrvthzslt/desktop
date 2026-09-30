@@ -106,4 +106,3 @@ List of services that are set up for this desktop environment:
 - Unify sxhkd and dwmblocks command calls by arranging them to scripts
 - Start Xorg from kmscon
 - Fix dwm.desktop file
-- Fix brightness progressbar performance

@@ -1,6 +1,17 @@
 #!/bin/sh
 
+get_external_displays() {
+  if ! xrandr --query 2>/dev/null |
+    awk '$2 == "connected" && $1 !~ /^(eDP|LVDS|DSI)/ {found=1} END {exit !found}'; then
+    return
+  fi
+
+  ddcutil detect 2>/dev/null | awk '/^Display/ {print $2}' | sort -u
+}
+
 main() {
+  displays=$(get_external_displays)
+
   case $1 in
     inc)
       increase_brightness
@@ -17,17 +28,11 @@ main() {
   esac
 }
 
-get_external_displays() {
-  ddcutil detect 2>/dev/null | awk '/^Display/ {print $2}'
-}
-
 change_brightness() {
   # Internal display
   brightnessctl set 5%"$1"
 
   # External displays
-  displays=$(get_external_displays)
-
   for disp in $displays; do
     ddcutil --display "$disp" setvcp 10 "$1" 5
   done
@@ -46,10 +51,8 @@ progress_bar() {
 }
 
 get_brightness_percentage() {
-  displays=$(get_external_displays)
-
   if [ -z "$displays" ]; then
-    percentage=$(($(brightnessctl get) * 100 / $(brightnessctl max)))
+    percentage=$(brightnessctl -m | awk -F, '{gsub(/%/, "", $4); print $4; exit}')
   else
     display=$(printf '%s\n' "$displays" | awk 'NR == 1 {print; exit}')
     percentage=$(ddcutil --display "$display" getvcp 10 2>/dev/null |
