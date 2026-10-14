@@ -7,7 +7,6 @@ session=${1:-dwm}
 case $session in
   dwm)
     "$HOME"/.dwm/autostart.sh
-    exec dwm >"$HOME"/.dwm/log 2>&1
     ;;
   i3) exec i3 ;;
   *) exec $1 ;;

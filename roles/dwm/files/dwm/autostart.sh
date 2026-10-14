@@ -1,16 +1,21 @@
 #!/bin/sh
 
-picom_version=$(picom --version)
+main() {
+  picom_version=$(picom --version)
 
-gnome-keyring-daemon -r -d &
-autorandr --change --force && nitrogen --restore;
-sxhkd &
-dwmblocks &
-clipmenud &
-if [ "$picom_version" = 'v9.1' ]; then
+  gnome-keyring-daemon -r -d &
+  autorandr --change --force && nitrogen --restore
+  sxhkd &
+  dwmblocks &
+  clipmenud &
+  if [ "$picom_version" = 'v9.1' ]; then
     picom --experimental-backends &
-else
+  else
     picom &
-fi
-dunst &
-sh ~/.dwm/poststart.sh 2>/dev/null &
+  fi
+  dunst &
+
+  exec dwm >"$HOME"/.dwm/log 2>&1
+}
+
+main
