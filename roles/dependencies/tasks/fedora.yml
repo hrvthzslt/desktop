@@ -30,6 +30,7 @@
       - xsel
       - zip
       - unzip
+      - nmtui
     state: present
   become: yes
 
