@@ -17,9 +17,9 @@
     state: present
   become: yes
 
-- name: Ensure .profile contains startx command
+- name: Ensure .bash_profile contains startx command
   ansible.builtin.lineinfile:
-    path: ~/.profile
+    path: ~/.bash_profile
     line: "if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi"
     state: present
     insertafter: EOF
