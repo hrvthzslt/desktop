@@ -1,0 +1,18 @@
+---
+- name: run debian tasks
+  ansible.builtin.import_tasks:
+    file: debian.yml
+  when: ansible_facts['pkg_mgr'] == 'apt'
+  tags:
+    - thorium
+    - install
+    - desktop
+
+- name: skip Thorium on Fedora
+  ansible.builtin.import_tasks:
+    file: fedora.yml
+  when: ansible_facts['os_family'] == 'RedHat'
+  tags:
+    - thorium
+    - install
+    - desktop
