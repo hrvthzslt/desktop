@@ -6,6 +6,13 @@
   tags:
     - sxhkd
 
+- name: install sxhkd on Fedora
+  ansible.builtin.import_tasks:
+    file: fedora.yml
+  when: ansible_facts['os_family'] == 'RedHat'
+  tags:
+    - sxhkd
+
 - name: symlink config
   tags:
     - sxhkd

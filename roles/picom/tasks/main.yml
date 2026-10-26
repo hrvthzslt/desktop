@@ -8,6 +8,12 @@
         state: present
       become: yes
       when: ansible_facts['os_family'] == 'Debian'
+    - name: install picom on Fedora
+      ansible.builtin.dnf:
+        name: picom
+        state: present
+      become: yes
+      when: ansible_facts['os_family'] == 'RedHat'
     - name: symlink base config
       ansible.builtin.file:
         src: "{{ role_path }}/files/picom.conf"

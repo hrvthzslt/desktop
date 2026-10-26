@@ -1,0 +1,6 @@
+---
+- name: install
+  ansible.builtin.dnf:
+    name: sxhkd
+    state: present
+  become: yes

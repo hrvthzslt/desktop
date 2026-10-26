@@ -1,0 +1,40 @@
+---
+- name: install
+  ansible.builtin.dnf:
+    name:
+      - git
+      - make
+      - gcc
+      - libX11-devel
+      - libXft-devel
+      - libXinerama-devel
+      - libXrandr-devel
+      - libXfixes-devel
+      - xorg-x11-server-Xorg
+      - xorg-x11-server-utils
+      - libnotify
+      - lm_sensors
+      - sysstat
+      - acpi
+      - ddcutil
+      - ncdu
+      - nitrogen
+      - arandr
+      - autorandr
+      - dunst
+      - gnome-keyring
+      - alacritty
+      - flameshot
+      - screenkey
+      - thunar
+      - brightnessctl
+      - xsel
+      - zip
+      - unzip
+      - onboard
+    state: present
+  become: yes
+
+- name: make brightnessctl runnable without sudo
+  ansible.builtin.shell: 'sudo chmod +s "$(which brightnessctl)"'
+  become: yes
