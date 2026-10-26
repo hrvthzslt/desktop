@@ -62,7 +62,7 @@ super + shift + a
     notification toggle ; pkill -RTMIN+12 dwmblocks
 
 super + w
-    thorium-browser
+    helium
 
 super + e
     pgrep screenkey || screenkey --show-settings
