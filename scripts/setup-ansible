@@ -14,7 +14,7 @@ debian() {
 
 fedora() {
   if ! command -v ansible-playbook >/dev/null; then
-    sudo dnf install -y python3 python3-venv ansible-core
+    sudo dnf install -y ansible
   fi
   install_collection
 }
