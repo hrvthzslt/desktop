@@ -1,4 +1,0 @@
----
-- name: Fedora does not install Thorium
-  ansible.builtin.debug:
-    msg: Thorium installation is not supported on Fedora.
