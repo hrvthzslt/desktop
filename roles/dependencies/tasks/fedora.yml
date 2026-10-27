@@ -30,7 +30,7 @@
       - xsel
       - zip
       - unzip
-      - nmtui
+      - NetworkManager-tui
     state: present
   become: yes
 
