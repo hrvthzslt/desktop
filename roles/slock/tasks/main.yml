@@ -3,6 +3,11 @@
   tags:
     - slock
   block:
+    - name: Ensure group "nogroup" exists
+      ansible.builtin.group:
+        name: nogroup
+        state: present
+      become: yes
     - name: copy config.def.h
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/slock/config.def.h"
