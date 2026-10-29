@@ -1,0 +1,37 @@
+---
+- name: install GnuPG
+  ansible.builtin.apt:
+    name: gnupg
+    state: present
+  become: yes
+
+- name: download Helium signing key
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/imputnet/helium-linux/main/pubkey.asc
+    dest: /tmp/helium-pubkey.asc
+    mode: '0644'
+  become: yes
+
+- name: install Helium signing key
+  ansible.builtin.command:
+    cmd: gpg --dearmor --output /usr/share/keyrings/helium.gpg /tmp/helium-pubkey.asc
+    creates: /usr/share/keyrings/helium.gpg
+  become: yes
+
+- name: add Helium APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/helium.gpg] https://pkg.helium.computer/deb stable main"
+    filename: helium
+    state: present
+  become: yes
+
+- name: update package list
+  ansible.builtin.apt:
+    update_cache: yes
+  become: yes
+
+- name: install Helium
+  ansible.builtin.apt:
+    name: helium-bin
+    state: present
+  become: yes

@@ -1,6 +1,8 @@
 #!/bin/sh
 
 main() {
+  export XDG_SESSION_TYPE=x11
+
   picom_version=$(picom --version)
 
   gnome-keyring-daemon -r -d &

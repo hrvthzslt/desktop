@@ -6,6 +6,13 @@
     file: debian.yml
   when: ansible_facts['pkg_mgr'] == 'apt'
 
+- name: install Fedora dependencies
+  tags:
+    - install
+  ansible.builtin.import_tasks:
+    file: fedora.yml
+  when: ansible_facts['os_family'] == 'RedHat'
+
 - name: Symlink xinitrc
   tags:
     - link

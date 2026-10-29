@@ -1,0 +1,26 @@
+---
+- name: install
+  ansible.builtin.dnf:
+    name:
+      - psmisc
+      - alsa-utils
+      - pipewire-alsa
+      - pipewire-pulseaudio
+      - pavucontrol
+      - bluez
+      - blueman
+      - xorg-x11-xinit
+      - NetworkManager
+      - keychain
+      - gvfs
+      - power-profiles-daemon
+    state: present
+  become: yes
+
+- name: Ensure .bash_profile contains startx command
+  ansible.builtin.lineinfile:
+    path: ~/.bash_profile
+    line: "if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi"
+    state: present
+    insertafter: EOF
+    create: yes

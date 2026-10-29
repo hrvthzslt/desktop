@@ -46,8 +46,10 @@ ssh: # Create new ssh key, if needed
 
 lint: # Run shellcheck on scripts
 	shellcheck roles/scripts/files/scripts/*
+	shellcheck roles/barebones/files/scripts/*
+	ansible-playbook --syntax-check main.yml barebones.yml ssh.yml
 
 pre-commit-hook: # Add pre-commit hook running shellcheck on scripts
 	@echo '#!/bin/sh' > .git/hooks/pre-commit
-	@echo 'shellcheck roles/scripts/files/scripts/*' >> .git/hooks/pre-commit
+	@echo 'make lint' >> .git/hooks/pre-commit
 	@chmod +x .git/hooks/pre-commit

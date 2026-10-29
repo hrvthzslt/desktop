@@ -1,0 +1,12 @@
+---
+- name: enable Helium COPR repository
+  community.general.copr:
+    name: imput/helium
+    state: enabled
+  become: yes
+
+- name: install Helium
+  ansible.builtin.dnf:
+    name: helium-bin
+    state: present
+  become: yes

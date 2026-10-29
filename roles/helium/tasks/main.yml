@@ -1,0 +1,14 @@
+---
+- name: install helium
+  tags:
+    - helium
+  block:
+    - name: run Debian tasks
+      ansible.builtin.import_tasks:
+        file: debian.yml
+      when: ansible_facts['pkg_mgr'] == 'apt'
+
+    - name: run Fedora tasks
+      ansible.builtin.import_tasks:
+        file: fedora.yml
+      when: ansible_facts['os_family'] == 'RedHat'

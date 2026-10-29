@@ -1,6 +1,6 @@
 # DESKTOP
 
-My custom desktop setup based on **suckless** tools, built around **dwm**. Automated with **Ansible**, for **Debian**-based distributions.
+My custom desktop setup based on **suckless** tools, built around **dwm**. Automated with **Ansible**, for **Debian**-based and **Fedora** distributions.
 
 ![Desktop screenshot](assets/screenshot_1.png)
 
@@ -91,7 +91,7 @@ List of services that are set up for this desktop environment:
 - **Super + Shift + C**: Clear clipboard
 - **Super + A**: Close notification - _dunst_
 - **Super + Shift + A**: Pause notifications - _dunst_
-- **Super + W**: Open web browser - _thorium_
+- **Super + W**: Open web browser - _helium_
 - **Super + E**: Show key presses - _screenkey_
 - **Super + Shift + E**: Stop showing key presses - _screenkey_
 - **Super + O**: Open file browser - _thunar_
