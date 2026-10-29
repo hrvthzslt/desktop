@@ -14,6 +14,7 @@
       - keychain
       - gvfs
       - power-profiles-daemon
+      - google-noto-fonts-all-vf
     state: present
   become: yes
 
