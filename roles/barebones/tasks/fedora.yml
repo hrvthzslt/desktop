@@ -15,6 +15,7 @@
       - gvfs
       - power-profiles-daemon
       - google-noto-fonts-all-vf
+      - hunspell
     state: present
   become: yes
 
