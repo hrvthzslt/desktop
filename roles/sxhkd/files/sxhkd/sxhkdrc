@@ -76,5 +76,5 @@ super + shift + m
 super + shift + t
     vpn_control switch ; pkill -RTMIN+20 dwmblocks
 
-super + shift + l
+super + Tab
     keemap switch ; pkill -RTMIN+18 dwmblocks
